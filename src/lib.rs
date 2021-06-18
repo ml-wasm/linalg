@@ -7,6 +7,7 @@ use wasm_bindgen::prelude::*;
 pub use wasm_bindgen_rayon::init_thread_pool;
 
 // Run when the wasm module is instantiated
+#[cfg(feature = "start")]
 #[wasm_bindgen(start)]
 pub fn start() {
     utils::set_panic_hook();
