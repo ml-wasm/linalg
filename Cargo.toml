@@ -2,7 +2,7 @@
 authors = ["Archit Bhonsle <abhonsle2000@gmail.com>"]
 description = "Linear algebra accelerated by WebAssembly"
 edition = "2018"
-license-file = "../../LICENSE"
+license-file = "LICENSE"
 name = "linalg"
 repository = "https://github.com/wasml/wasml"
 version = "0.1.0"
