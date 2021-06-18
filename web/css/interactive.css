@@ -1,0 +1,72 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 100px auto;
+}
+
+section.start {
+  border-bottom: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+section.code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#code {
+  height: 50px;
+  width: 100%;
+  font-size: 40px;
+  font-family: "Fira Code", "Courier New";
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+section.end {
+  border-top: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.num {
+  font-size: 40px;
+}
+
+.mat {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 40px;
+  font-style: italic;
+}
+
+.data {
+  display: grid;
+  margin-left: 10px;
+  padding: 5px;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
