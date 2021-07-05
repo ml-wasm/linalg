@@ -1,3 +1,5 @@
+mod stats;
+
 use ndarray::{s, Array, Array2, Axis};
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
