@@ -1,0 +1,52 @@
+name: docs
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    outputs:
+      run_job: ${{ steps.check_files.outputs.run_job }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - id: check_files
+        run: |
+          if [ $(git diff --name-only --diff-filter=ADMR @~..@ | grep -c docs/) -eq 0 ]; then
+              echo "::set-output name=run_job::false"
+          else
+            echo "::set-output name=run_job::true"
+          fi
+
+  gh-release:
+    needs: check
+    if: needs.check.outputs.run_job == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.GH_PAGES_DEPLOY }}
+      - name: Release to GitHub Pages
+        env:
+          USE_SSH: true
+          GIT_USER: git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "gh-actions"
+
+          if [ -e yarn.lock ]; then
+            yarn install --frozen-lockfile
+          elif [ -e package-lock.json ]; then
+            npm ci
+          else
+            npm i
+          fi
+          npm run deploy
