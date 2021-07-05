@@ -5,13 +5,13 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 module.exports = {
   title: 'wasml/linalg',
   tagline: 'Linear Algebra powered by WebAssembly',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   // favicon: 'img/favicon.ico',
   organizationName: 'wasml',
   projectName: 'linalg',
+  url: 'https://wasml.github.io',
+  baseUrl: '/linalg/',
   themeConfig: {
     navbar: {
       title: 'wasml/linalg',
