@@ -42,9 +42,9 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "gh-actions"
 
-          if [ -e yarn.lock ]; then
+          if [ -e docs/yarn.lock ]; then
             yarn install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
+          elif [ -e docs/package-lock.json ]; then
             npm ci
           else
             npm i
