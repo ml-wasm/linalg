@@ -22,21 +22,9 @@ module.exports = {
       items: [
         {
           type: 'doc',
-          docId: 'getting_started',
+          docId: 'Getting Started',
           position: 'left',
-          label: 'Getting Started',
-        },
-        {
-          type: 'doc',
-          docId: 'one_dimensional/index',
-          position: 'left',
-          label: 'One Dimensional',
-        },
-        {
-          type: 'doc',
-          docId: 'two_dimensional/index',
-          position: 'left',
-          label: 'Two Dimensional',
+          label: 'Docs',
         },
         // { to: '/blog', label: 'Blog', position: 'left' }, Work on this later
         {
