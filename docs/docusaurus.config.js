@@ -12,6 +12,7 @@ module.exports = {
   projectName: 'linalg',
   url: 'https://wasml.github.io',
   baseUrl: '/linalg/',
+  trailingSlash: false,
   themeConfig: {
     navbar: {
       title: 'wasml/linalg',
