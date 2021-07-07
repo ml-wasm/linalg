@@ -1,3 +1,0 @@
----
-title: Integers1d
----
