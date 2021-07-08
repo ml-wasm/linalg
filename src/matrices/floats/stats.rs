@@ -1,12 +1,12 @@
-use super::Floats2d;
+use super::FloatsMatrix;
 use ndarray::{parallel::prelude::*, Axis};
 use ndarray_stats::QuantileExt;
 use wasm_bindgen::prelude::*;
 
-use crate::one_dimensional::floats::Floats1d;
+use crate::vectors::floats::FloatsVector;
 
 #[wasm_bindgen]
-impl Floats2d {
+impl FloatsMatrix {
     /// Get the maximum element in the array
     pub fn max(&self) -> f64 {
         *self
@@ -18,7 +18,7 @@ impl Floats2d {
 
     /// Get the maximum element of each column in the matrix
     #[wasm_bindgen(js_name = maxC)]
-    pub fn max_c(&self) -> Floats1d {
+    pub fn max_c(&self) -> FloatsVector {
         let mut vec = Vec::new();
         self.data
             .axis_iter(Axis(0))
@@ -26,14 +26,14 @@ impl Floats2d {
             .map(|x| *x.max().unwrap())
             .collect_into_vec(&mut vec);
 
-        Floats1d {
+        FloatsVector {
             data: ndarray::Array1::from_vec(vec),
         }
     }
 
     /// Get the maximum element of each row in the matrix
     #[wasm_bindgen(js_name = maxR)]
-    pub fn max_r(&self) -> Floats1d {
+    pub fn max_r(&self) -> FloatsVector {
         let mut vec = Vec::new();
         self.data
             .axis_iter(Axis(1))
@@ -41,7 +41,7 @@ impl Floats2d {
             .map(|x| *x.max().unwrap())
             .collect_into_vec(&mut vec);
 
-        Floats1d {
+        FloatsVector {
             data: ndarray::Array1::from_vec(vec),
         }
     }
@@ -57,7 +57,7 @@ impl Floats2d {
 
     /// Get the minimum element of each column in the matrix
     #[wasm_bindgen(js_name = minC)]
-    pub fn min_c(&self) -> Floats1d {
+    pub fn min_c(&self) -> FloatsVector {
         let mut vec = Vec::new();
         self.data
             .axis_iter(Axis(0))
@@ -65,14 +65,14 @@ impl Floats2d {
             .map(|x| *x.min().unwrap())
             .collect_into_vec(&mut vec);
 
-        Floats1d {
+        FloatsVector {
             data: ndarray::Array1::from_vec(vec),
         }
     }
 
     /// Get the minimum element of each row in the matrix
     #[wasm_bindgen(js_name = minR)]
-    pub fn min_r(&self) -> Floats1d {
+    pub fn min_r(&self) -> FloatsVector {
         let mut vec = Vec::new();
         self.data
             .axis_iter(Axis(1))
@@ -80,7 +80,7 @@ impl Floats2d {
             .map(|x| *x.min().unwrap())
             .collect_into_vec(&mut vec);
 
-        Floats1d {
+        FloatsVector {
             data: ndarray::Array1::from_vec(vec),
         }
     }
@@ -93,16 +93,16 @@ impl Floats2d {
 
     /// Get the var of each row in the matrix
     #[wasm_bindgen(js_name = varC)]
-    pub fn var_c(&self, dof: f64) -> Floats1d {
-        Floats1d {
+    pub fn var_c(&self, dof: f64) -> FloatsVector {
+        FloatsVector {
             data: self.data.var_axis(Axis(0), dof),
         }
     }
 
     /// Get the var of each column in the matrix
     #[wasm_bindgen(js_name = varR)]
-    pub fn var_r(&self, dof: f64) -> Floats1d {
-        Floats1d {
+    pub fn var_r(&self, dof: f64) -> FloatsVector {
+        FloatsVector {
             data: self.data.var_axis(Axis(1), dof),
         }
     }
@@ -115,16 +115,16 @@ impl Floats2d {
 
     /// Get the standard deviation of each row in the matrix
     #[wasm_bindgen(js_name = stdC)]
-    pub fn std_c(&self, dof: f64) -> Floats1d {
-        Floats1d {
+    pub fn std_c(&self, dof: f64) -> FloatsVector {
+        FloatsVector {
             data: self.data.std_axis(Axis(0), dof),
         }
     }
 
     /// Get the standard deviation of each column in the matrix
     #[wasm_bindgen(js_name = stdR)]
-    pub fn std_r(&self, dof: f64) -> Floats1d {
-        Floats1d {
+    pub fn std_r(&self, dof: f64) -> FloatsVector {
+        FloatsVector {
             data: self.data.std_axis(Axis(1), dof),
         }
     }

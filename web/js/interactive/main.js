@@ -1,13 +1,13 @@
-import init, { Floats1d, Floats2d } from '../../../pkg/linalg.js';
+import init, { FloatsVector, FloatsMatrix } from '../../../pkg/linalg.js';
 import { createDisplayDiv } from './display.js';
 
 (async () => {
   await init();
-  const a = new Floats2d([
+  const a = new FloatsMatrix([
     [1, 2, 3],
     [4, 5, 6],
   ]);
-  const b = new Floats2d([
+  const b = new FloatsMatrix([
     [7, 8, 9],
     [10, 11, 12],
   ]);
@@ -25,17 +25,17 @@ import { createDisplayDiv } from './display.js';
 })();
 
 const run = text => {
-  const a = new Floats2d([
+  const a = new FloatsMatrix([
     [1, 2, 3],
     [4, 5, 6],
   ]);
-  const b = new Floats2d([
+  const b = new FloatsMatrix([
     [7, 8, 9],
     [10, 11, 12],
   ]);
 
   const func = new Function('a', 'b', 'Floats1d', 'Floats2d', `return ${text}`);
-  const ret = func(a, b, Floats1d, Floats2d);
+  const ret = func(a, b, FloatsVector, FloatsMatrix);
 
   const end = document.querySelector('section.end');
   while (end.firstChild) {

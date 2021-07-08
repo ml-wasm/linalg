@@ -10,11 +10,11 @@ use crate::{
 };
 
 #[wasm_bindgen]
-pub struct Integers1d {
+pub struct IntegersVector {
     #[wasm_bindgen(skip)]
     pub data: Array1<i32>,
 }
 
-one_dimensional_interop_methods!(Integers1d, i32);
-one_dimensional_basic_methods!(Integers1d, i32);
-one_dimensional_math_methods!(Integers1d, i32);
+one_dimensional_interop_methods!(IntegersVector, i32);
+one_dimensional_basic_methods!(IntegersVector, i32);
+one_dimensional_math_methods!(IntegersVector, i32);

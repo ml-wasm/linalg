@@ -1,10 +1,10 @@
-import { Floats2d } from '../../../pkg/linalg.js';
+import { FloatsMatrix } from '../../../pkg/linalg.js';
 
 export const bigTest = (start, inclusiveEnd, step, iters) => {
   const data = {
-    'size': [],
-    'time': [],
-    'type': [],
+    size: [],
+    time: [],
+    type: [],
   };
   for (let i = start; i <= inclusiveEnd; i += step) {
     try {
@@ -25,7 +25,7 @@ export const bigTest = (start, inclusiveEnd, step, iters) => {
   }
   console.log(data);
   console.log(JSON.stringify(data));
-}
+};
 
 export const matmul = (iters, n) => {
   console.log(`Multiplying ${iters} ${n}x${n} matrices ->`);
@@ -73,8 +73,8 @@ export function matrixMultiplicationTest(size) {
   const a = generateMatrix(size, size);
   const b = generateMatrix(size, size);
 
-  const x = new Floats2d(a);
-  const y = new Floats2d(b);
+  const x = new FloatsMatrix(a);
+  const y = new FloatsMatrix(b);
 
   const [nRes, vTime] = timeit(() => vanillaMultiplication(a, b));
   const [oRes, oTime] = timeit(() => x.dot(y));

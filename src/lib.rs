@@ -1,6 +1,6 @@
-pub mod one_dimensional;
-pub mod two_dimensional;
+pub mod matrices;
 pub mod utils;
+pub mod vectors;
 
 use wasm_bindgen::prelude::*;
 

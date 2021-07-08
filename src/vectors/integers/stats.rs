@@ -1,25 +1,25 @@
-use super::Floats1d;
+use super::IntegersVector;
 use ndarray_stats::QuantileExt;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-impl Floats1d {
+impl IntegersVector {
     /// Get minimun element
-    pub fn min(&self) -> f64 {
+    pub fn min(&self) -> i32 {
         *self.data.min().unwrap()
     }
 
     /// Get maximun element
-    pub fn max(&self) -> f64 {
+    pub fn max(&self) -> i32 {
         *self.data.max().unwrap()
     }
 
     /// Get the mean of all the elements in the array
-    pub fn mean(&self) -> f64 {
+    pub fn mean(&self) -> i32 {
         self.data.mean().unwrap()
     }
 
-    /// Get median off all elements
+    /// Get median of all elements
     pub fn median(&self) -> f64 {
         let mut d = self.data.to_vec();
         d.sort_by(|a, b| a.partial_cmp(b).unwrap());
@@ -32,13 +32,16 @@ impl Floats1d {
         }
     }
 
-    /// Get the variance of all the elements in the array
+    /// Get variance of all elements in array
     pub fn var(&self, ddof: f64) -> f64 {
-        self.data.var(ddof)
+        let mean = self.mean();
+        let sqr_diff = self.data.iter().map(|x| (x - mean).pow(2)).sum::<i32>() as f64;
+
+        return sqr_diff / (self.len() as f64 - ddof);
     }
 
-    /// Get the mean of all the elements in the array
+    /// Get standard_deviation of all elements in array
     pub fn std(&self, ddof: f64) -> f64 {
-        self.data.std(ddof)
+        self.var(ddof).sqrt()
     }
 }
