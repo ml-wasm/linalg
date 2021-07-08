@@ -123,3 +123,49 @@ const [spliced, element] = a.spliced(1);
 console.log(spliced.data, element);
 // [1, 3] 2
 ```
+
+## Math Methods
+
+Methods to perform simple mathematical operations on the array.
+
+```js
+const a = new IntegersVector([1, 2, 3]);
+const b = new IntegersVector([4, 5, 6]);
+
+// Perform element-wise addition of two IntegersVectors
+console.log(a.add(b).data); // [5, 7, 9]
+
+// Perform element-wise subtraction of two IntegersVectors
+console.log(a.sub(b).data); // [-3, -3, -3]
+
+// Perform element-wise multiplication of two IntegersVectors
+console.log(a.mul(b).data); // [4, 10, 18]
+
+// Perform element-wise division of two IntegersVectors
+console.log(b.div(a).data); // [4, 2, 2]
+
+// Return the addition or product of the IntegersVector
+console.log(a.sum()); // 6
+console.log(b.product()); // 120
+
+// Efficiently perform in-place element-wise scaled addition of two IntegersVectors
+a.scaledAdd(2, b);
+console.log(a.data); // [9, 12, 15]
+```
+
+## Statistical Methods
+
+Methods to perform basic statistical operations.
+
+```js
+const a = new IntegersVector([1, 2, 3]);
+
+// Return the minimum element in the array
+console.log(a.min()); // 1
+
+// Return the minimum element in the array
+console.log(a.max()); // 3
+
+// Return the mean of all the elements in the array
+console.log(a.mean()); // 2
+```

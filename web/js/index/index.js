@@ -34,27 +34,14 @@ import { two_dimensional_floats } from './two.js';
 })();
 
 const test = () => {
-  const a = new IntegersVector([1, 2, 3]);
-  const b = new IntegersVector([4, 5, 6]);
+	const a = new IntegersVector([1, 2, 3]);
 
-  // Reverse the Integers1d
-  console.log(a.reversed().data);
-  // [3, 2, 1]
+	// Return the minimum element in the array
+	console.log(a.min());  // 1
 
-  // Append an element to the Integers1d
-  console.log(a.appended(7).data);
-  // [1, 2, 3, 7]
+	// Return the minimum element in the array
+	console.log(a.max());  // 3
 
-  // Extend the Integers1d with another
-  console.log(a.extended(b).data);
-  // [1, 2, 3, 4, 5, 6]
-
-  // Insert the given element at the specified index
-  console.log(a.inserted(1, 7).data);
-  // [1, 7, 2, 3]
-
-  // Removes an element from the specified index
-  const [spliced, element] = a.spliced(1);
-  console.log(spliced.data, element);
-  // [1, 3] 2
+	// Return the mean of all the elements in the array
+	console.log(a.mean());  // 2
 };

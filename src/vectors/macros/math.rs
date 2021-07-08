@@ -32,6 +32,7 @@ macro_rules! one_dimensional_math_methods {
             }
 
             /// Efficiently performs self += alpha * rhs
+            #[wasm_bindgen(js_name = scaledAdd)]
             pub fn scaled_add(&mut self, alpha: $typ, other: &$stuc) {
                 self.data.scaled_add(alpha, &other.data);
             }
