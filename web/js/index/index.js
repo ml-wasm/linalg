@@ -1,4 +1,4 @@
-import init, { initThreadPool, IntegersVector } from '../../../pkg/linalg.js';
+import init, { initThreadPool, StringsVector } from '../../../pkg/linalg.js';
 
 // import { bigTest } from './matmul.js';
 import { one_dimensional_floats } from './one.js';
@@ -34,14 +34,28 @@ import { two_dimensional_floats } from './two.js';
 })();
 
 const test = () => {
-	const a = new IntegersVector([1, 2, 3]);
+const a = new StringsVector(["a", "b", "c"]);
+const b = new StringsVector(["d", "e", "f"]);
 
-	// Return the minimum element in the array
-	console.log(a.min());  // 1
+// Reverse the StringsVector
+console.log(a.reversed().data);
+// ["c", "b", "a"]
 
-	// Return the minimum element in the array
-	console.log(a.max());  // 3
+// Append an element to the StringsVector
+console.log(a.appended("g").data);
+// ["a", "b", "c", "g"]
 
-	// Return the mean of all the elements in the array
-	console.log(a.mean());  // 2
+// Extend the StringsVector with another
+console.log(a.extended(b).data);
+// ["a", "b", "c", "d", "e", "f"]
+
+// Insert the given element at the specified index
+console.log(a.inserted(1, "g").data);
+// ["a", "g", "b", "c"]
+
+// Removes an element from the specified index
+const [spliced, element] = a.spliced(1);
+console.log(spliced.data, element);
+// ["a", "c"] "b"
+
 };
