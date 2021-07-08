@@ -1,3 +1,0 @@
----
-title: Strings2d
----

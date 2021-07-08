@@ -45,5 +45,5 @@ will be fixed in the future.
 :::
 
 For more information on how to work with one dimensional arrays or vectors go
-[here](One%20Dimensional/index). For two dimensional arrays or matrices go
-[here](Two%20Dimensional/index).
+[here](Vectors/index). For two dimensional arrays or matrices go
+[here](Vectors/index).

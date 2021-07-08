@@ -1,3 +1,0 @@
----
-title: Floats2d
----

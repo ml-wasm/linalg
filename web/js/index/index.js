@@ -17,20 +17,20 @@ import { two_dimensional_floats } from './two.js';
 
   test();
 
-  console.group(
-    '%cONE DIMENSIONAL',
-    'color: white; background-color: darkblue; padding: 5px 10px; border-radius: 5px'
-  );
-  one_dimensional_floats();
-  console.groupEnd();
+  // console.group(
+  //   '%cONE DIMENSIONAL',
+  //   'color: white; background-color: darkblue; padding: 5px 10px; border-radius: 5px'
+  // );
+  // one_dimensional_floats();
+  // console.groupEnd();
 
-  console.group(
-    '%cTWO DIMENSIONAL',
-    'color: white; background-color: darkblue; padding: 5px 10px; border-radius: 5px'
-  );
-  two_dimensional_floats();
+  // console.group(
+  //   '%cTWO DIMENSIONAL',
+  //   'color: white; background-color: darkblue; padding: 5px 10px; border-radius: 5px'
+  // );
+  // two_dimensional_floats();
 
-  console.groupEnd();
+  // console.groupEnd();
 })();
 
 const test = () => {

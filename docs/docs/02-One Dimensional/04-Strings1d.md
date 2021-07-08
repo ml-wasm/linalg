@@ -1,3 +1,0 @@
----
-title: Strings1d
----
