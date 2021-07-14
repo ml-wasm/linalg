@@ -9,7 +9,7 @@ from the package and set up the threads as explained in [getting started](../).
 
 ## Constructors Methods
 
-These methods are used to create new `IntegerVector`s.
+These methods are used to create new `StringsVector`s.
 
 ```js
 // Create an StringsVector from a given JavaScript array
@@ -52,7 +52,7 @@ console.log(b.data); // ["a", "b", "c"]
 
 ## Utility Methods
 
-Basic getter and setters.
+Basic getters and setters.
 
 ```js
 const x = new StringsVector(['a', 'b', 'c']);
