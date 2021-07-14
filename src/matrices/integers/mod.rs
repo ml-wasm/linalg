@@ -16,6 +16,6 @@ pub struct IntegersMatrix {
     pub data: Array2<i32>,
 }
 
-two_dimensional_interop_methods!(IntegersMatrix, Integers1d, i32);
+two_dimensional_interop_methods!(IntegersMatrix, IntegersVector, i32);
 two_dimensional_basic_methods!(IntegersMatrix, IntegersVector, i32);
 two_dimensional_math_methods!(IntegersMatrix, IntegersVector, i32);
