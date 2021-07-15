@@ -22,9 +22,9 @@ macro_rules! two_dimensional_interop_methods {
                 $stuc::new(vector)
             }
 
-            /// Gives the value contained in the ndarray as a javascript array
-            #[wasm_bindgen(getter, js_name = data)]
-            pub fn data_to_js(&self) -> JsValue {
+            /// Gives the JSON representation of the array
+            #[wasm_bindgen(js_name = toJSON)]
+            pub fn to_json(&self) -> JsValue {
                 let mut repr: Vec<Vec<$typ>> = Vec::new();
 
                 for row_idx in 0..self.data.nrows() {
@@ -32,6 +32,12 @@ macro_rules! two_dimensional_interop_methods {
                 }
 
                 JsValue::from_serde(&repr).unwrap()
+            }
+
+            /// Gives the value contained in the ndarray as a javascript array
+            #[wasm_bindgen(getter, js_name = data)]
+            pub fn data_to_js(&self) -> JsValue {
+                self.to_json()
             }
 
             /// Get the string representation of the underlying ndarray

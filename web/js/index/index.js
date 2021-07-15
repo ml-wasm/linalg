@@ -1,4 +1,4 @@
-import init, { initThreadPool, StringsVector } from '../../../pkg/linalg.js';
+import init, { initThreadPool, FloatsVector, FloatsMatrix } from '../../../pkg/linalg.js';
 
 // import { bigTest } from './matmul.js';
 import { one_dimensional_floats } from './one.js';
@@ -34,28 +34,33 @@ import { two_dimensional_floats } from './two.js';
 })();
 
 const test = () => {
-const a = new StringsVector(["a", "b", "c"]);
-const b = new StringsVector(["d", "e", "f"]);
+	const a = new FloatsMatrix([[0.1, 0.2, 0.3], [0.5, 0.6, 0.7]]);
+	const b = new FloatsMatrix([[0.8, 0.9, 1.0], [1.1, 1.2, 1.3]]);
 
-// Reverse the StringsVector
-console.log(a.reversed().data);
-// ["c", "b", "a"]
+	// Append an element to the FloatsMatrix
+	console.log(a.appendedR(new FloatsVector([1.4, 1.5, 1.6])).data);
+	// [[0.1, 0.2, 0.3],
+	//  [0.5, 0.6, 0.7],
+	//  [1.4, 1.5, 1.6]]
 
-// Append an element to the StringsVector
-console.log(a.appended("g").data);
-// ["a", "b", "c", "g"]
+	// Extend the FloatsMatrix with another
+	console.log(a.extendedC(b).data);
+	// [[0.1, 0.2, 0.3],
+	//  [0.5, 0.6, 0.7],
+	//  [0.8, 0.9, 1.0],
+	//  [1.1, 1.2, 1.3]]
 
-// Extend the StringsVector with another
-console.log(a.extended(b).data);
-// ["a", "b", "c", "d", "e", "f"]
+	// Insert the given element at the specified index
+	console.log(a.insertedR(1, new FloatsVector([1.4, 1.5, 1.6])).data);
+	// [[0.1, 0.2, 0.3],
+	//  [1.4, 1.5, 1.6],
+	//  [0.5, 0.6, 0.7]]
 
-// Insert the given element at the specified index
-console.log(a.inserted(1, "g").data);
-// ["a", "g", "b", "c"]
-
-// Removes an element from the specified index
-const [spliced, element] = a.spliced(1);
-console.log(spliced.data, element);
-// ["a", "c"] "b"
-
+	// Removes an element from the specified index
+	const [spliced, column] = a.splicedC(1);
+	console.log(spliced.data, column.data);
+	// [[0.1, 0.3],
+	// [0.5, 0.7]]
+	//
+	// [0.2, 0.6]
 };
