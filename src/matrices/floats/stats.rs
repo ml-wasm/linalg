@@ -21,7 +21,7 @@ impl FloatsMatrix {
     pub fn max_c(&self) -> FloatsVector {
         let mut vec = Vec::new();
         self.data
-            .axis_iter(Axis(0))
+            .axis_iter(Axis(1))
             .into_par_iter()
             .map(|x| *x.max().unwrap())
             .collect_into_vec(&mut vec);
@@ -36,7 +36,7 @@ impl FloatsMatrix {
     pub fn max_r(&self) -> FloatsVector {
         let mut vec = Vec::new();
         self.data
-            .axis_iter(Axis(1))
+            .axis_iter(Axis(0))
             .into_par_iter()
             .map(|x| *x.max().unwrap())
             .collect_into_vec(&mut vec);
@@ -60,7 +60,7 @@ impl FloatsMatrix {
     pub fn min_c(&self) -> FloatsVector {
         let mut vec = Vec::new();
         self.data
-            .axis_iter(Axis(0))
+            .axis_iter(Axis(1))
             .into_par_iter()
             .map(|x| *x.min().unwrap())
             .collect_into_vec(&mut vec);
@@ -75,7 +75,7 @@ impl FloatsMatrix {
     pub fn min_r(&self) -> FloatsVector {
         let mut vec = Vec::new();
         self.data
-            .axis_iter(Axis(1))
+            .axis_iter(Axis(0))
             .into_par_iter()
             .map(|x| *x.min().unwrap())
             .collect_into_vec(&mut vec);

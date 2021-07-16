@@ -2,7 +2,7 @@
 title: FloatsMatrix
 ---
 
-FloatsMatrix is an one dimensional array or a vector of 64-bit floats.
+FloatsMatrix is an two dimensional array or a matrix of 64-bit floats.
 
 The following scripts assume that you have imported the `FloatsMatrix` object
 from the package and set up the threads as explained in [getting started](../).
@@ -13,7 +13,10 @@ These methods are used to create new `FloatsMatrix`s.
 
 ```js
 // Create a FloatsMatrix from a given JavaScript array
-const a = new FloatsMatrix([[0.1, 0.2, 0.3], [0.5, 0.6, 0.7]]);
+const a = new FloatsMatrix([
+  [0.1, 0.2, 0.3],
+  [0.5, 0.6, 0.7],
+]);
 console.log(a.data); // [[0.1, 0.2, 0.3], [0.5, 0.6, 0.7]]
 ```
 
@@ -22,7 +25,10 @@ console.log(a.data); // [[0.1, 0.2, 0.3], [0.5, 0.6, 0.7]]
 Some handy methods to work with the array.
 
 ```js
-const a = new FloatsMatrix([[0.1, 0.2, 0.3], [0.5, 0.6, 0.7]]);
+const a = new FloatsMatrix([
+  [0.1, 0.2, 0.3],
+  [0.5, 0.6, 0.7],
+]);
 
 // Both toJSON and data return a JavaScript array representation of the
 // FloatsMatrix
@@ -51,7 +57,10 @@ to the specified column(s).
 :::
 
 ```js
-const x = new FloatsMatrix([[0.1, 0.2, 0.3], [0.5, 0.6, 0.7]]);
+const x = new FloatsMatrix([
+  [0.1, 0.2, 0.3],
+  [0.5, 0.6, 0.7],
+]);
 
 // Get the number of rows in the FloatsMatrix
 console.log(x.nrows()); // 2
@@ -85,10 +94,10 @@ More complex methods used to manipulate the `FloatsMatrix`.
 Each of these methods has two versions. The "pure" version returns the result of
 performing the operation while the "impure" version actually changes the array.
 
-`append  -> appended`,
-`extend  -> extended`,
-`insert  -> inserted`,
-`splice  -> spliced`
+`append -> appended`,
+`extend -> extended`,
+`insert -> inserted`,
+`splice -> spliced`
 
 :::
 
@@ -101,8 +110,14 @@ the operation on each column-wise.
 :::
 
 ```js
-const a = new FloatsMatrix([[0.1, 0.2, 0.3], [0.5, 0.6, 0.7]]);
-const b = new FloatsMatrix([[0.8, 0.9, 1.0], [1.1, 1.2, 1.3]]);
+const a = new FloatsMatrix([
+  [0.1, 0.2, 0.3],
+  [0.5, 0.6, 0.7],
+]);
+const b = new FloatsMatrix([
+  [0.8, 0.9, 1.0],
+  [1.1, 1.2, 1.3],
+]);
 
 // Append an element to the FloatsMatrix
 console.log(a.appendedR(new FloatsVector([1.4, 1.5, 1.6])).data);
@@ -112,10 +127,8 @@ console.log(a.appendedR(new FloatsVector([1.4, 1.5, 1.6])).data);
 
 // Extend the FloatsMatrix with another
 console.log(a.extendedC(b).data);
-// [[0.1, 0.2, 0.3],
-//  [0.5, 0.6, 0.7],
-//  [0.8, 0.9, 1.0],
-//  [1.1, 1.2, 1.3]]
+// [[0.1, 0.2, 0.3, 0.8, 0.9, 1.0],
+//  [0.5, 0.6, 0.7, 1.1, 1.2, 1.3]]
 
 // Insert the given element at the specified index
 console.log(a.insertedR(1, new FloatsVector([1.4, 1.5, 1.6])).data);
@@ -137,8 +150,14 @@ console.log(spliced.data, column.data);
 Methods to perform simple mathematical operations on the array.
 
 ```js
-const a = new FloatsMatrix([[0.1, 0.2, 0.3], [0.5, 0.6, 0.7]]);
-const b = new FloatsMatrix([[0.8, 0.9, 1.0], [1.1, 1.2, 1.6]]);
+const a = new FloatsMatrix([
+  [0.1, 0.2, 0.3],
+  [0.5, 0.6, 0.7],
+]);
+const b = new FloatsMatrix([
+  [0.8, 0.9, 1.0],
+  [1.1, 1.2, 1.6],
+]);
 
 // Perform element-wise addition of two FloatsMatrices
 console.log(a.add(b).data);
@@ -197,13 +216,16 @@ FloatsVector by applying the operation on each column.
 :::
 
 ```js
-const a = new FloatsMatrix([[0.1, 0.2, 0.3], [0.4, 0.5, 0.6]]);
+const a = new FloatsMatrix([
+  [0.1, 0.2, 0.3],
+  [0.4, 0.5, 0.6],
+]);
 
 // Return the minimum element in the array
 console.log(a.min()); // 0.1
 
 // Return the minimum element in each row
-console.log(a.maxR().data); // [0.20000000000000004, 0.5]
+console.log(a.maxR().data); // [0.3, 0.6]
 
 // Returns the mean of each column
 console.log(a.meanC().data); // [0.25, 0.35, 0.44999999999999996]

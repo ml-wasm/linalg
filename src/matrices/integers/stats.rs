@@ -16,7 +16,7 @@ impl IntegersMatrix {
     pub fn max_c(&self) -> IntegersVector {
         let mut vec = Vec::new();
         self.data
-            .axis_iter(Axis(0))
+            .axis_iter(Axis(1))
             .into_par_iter()
             .map(|x| *x.iter().max().unwrap())
             .collect_into_vec(&mut vec);
@@ -31,7 +31,7 @@ impl IntegersMatrix {
     pub fn max_r(&self) -> IntegersVector {
         let mut vec = Vec::new();
         self.data
-            .axis_iter(Axis(1))
+            .axis_iter(Axis(0))
             .into_par_iter()
             .map(|x| *x.iter().max().unwrap())
             .collect_into_vec(&mut vec);
@@ -51,7 +51,7 @@ impl IntegersMatrix {
     pub fn min_c(&self) -> IntegersVector {
         let mut vec = Vec::new();
         self.data
-            .axis_iter(Axis(0))
+            .axis_iter(Axis(1))
             .into_par_iter()
             .map(|x| *x.iter().min().unwrap())
             .collect_into_vec(&mut vec);
@@ -66,7 +66,7 @@ impl IntegersMatrix {
     pub fn min_r(&self) -> IntegersVector {
         let mut vec = Vec::new();
         self.data
-            .axis_iter(Axis(1))
+            .axis_iter(Axis(0))
             .into_par_iter()
             .map(|x| *x.iter().min().unwrap())
             .collect_into_vec(&mut vec);
