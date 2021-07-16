@@ -32,7 +32,7 @@ const a = new IntegersMatrix([
 
 // Both toJSON and data return a JavaScript array representation of the
 // IntegersMatrix
-console.log(a.toJSON()); // [[1, 2, 0.3], [5, 6, 7]]
+console.log(a.toJSON()); // [[1, 2, 3], [5, 6, 7]]
 console.log(a.data); // [[1, 2, 3], [5, 6, 7]]
 
 // This returns the data and metadata about the IntegersMatrix
@@ -83,8 +83,8 @@ console.log(x.data);
 // Swap the values at the specified indices
 x.swapC(0, 1);
 console.log(x.data);
-// [[1, 2, 3],
-//  [8, 9, 10]]
+// [[2, 1, 3],
+//  [9, 8, 10]]
 ```
 
 More complex methods used to manipulate the `IntegersMatrix`.
@@ -127,10 +127,6 @@ console.log(a.appendedR(new IntegersVector([14, 15, 16])).data);
 
 // Extend the IntegersMatrix with another
 console.log(a.extendedC(b).data);
-// [[1, 2, 3],
-//  [5, 6, 7],
-//  [8, 9, 10],
-//  [11, 12, 13]]
 // [[1, 2, 3, 8, 9, 10],
 //  [5, 6, 7, 11, 12, 13]]
 

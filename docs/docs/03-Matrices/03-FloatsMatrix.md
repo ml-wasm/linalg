@@ -78,13 +78,13 @@ console.log(x.get([0, 1])); // 0.2
 x.setR(1, new FloatsVector([0.8, 0.9, 1.0]));
 console.log(x.data);
 // [[0.1, 0.2, 0.3],
-//  [0.8, 0.9, 1]]
+//  [0.9, 0.8, 1]]
 
 // Swap the values at the specified indices
 x.swapC(0, 1);
 console.log(x.data);
 // [[0.1, 0.2, 0.3],
-//  [0.8, 0.9, 1]]
+//  [0.9, 0.8, 1]]
 ```
 
 More complex methods used to manipulate the `FloatsMatrix`.

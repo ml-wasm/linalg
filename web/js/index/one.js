@@ -68,8 +68,8 @@ const one_dimensional_floats_math = () => {
   console.log('div', div.data);
 
   const a_clone = a.clone();
-  a_clone.scaled_add(2, b);
-  console.log('a.clone().scaled_add(2, b)', a_clone.data);
+  a_clone.scaledAdd(2, b);
+  console.log('a.clone().scaledAdd(2, b)', a_clone.data);
   console.log('a.sum()', a.sum());
   console.log('a.product()', a.product());
   console.log('a.var(0)', a.var(0));

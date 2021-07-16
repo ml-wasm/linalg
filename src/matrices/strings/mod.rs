@@ -13,5 +13,5 @@ pub struct StringsMatrix {
     pub data: Array2<String>,
 }
 
-two_dimensional_interop_methods!(StringsMatrix, Strings1d, String);
+two_dimensional_interop_methods!(StringsMatrix, StringsVector, String);
 two_dimensional_basic_methods!(StringsMatrix, StringsVector, String);

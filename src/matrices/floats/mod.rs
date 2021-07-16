@@ -16,6 +16,6 @@ pub struct FloatsMatrix {
     pub data: Array2<f64>,
 }
 
-two_dimensional_interop_methods!(FloatsMatrix, Floats1d, f64);
+two_dimensional_interop_methods!(FloatsMatrix, FloatsVector, f64);
 two_dimensional_basic_methods!(FloatsMatrix, FloatsVector, f64);
 two_dimensional_math_methods!(FloatsMatrix, FloatsVector, f64);

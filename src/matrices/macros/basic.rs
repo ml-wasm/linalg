@@ -97,8 +97,8 @@ macro_rules! two_dimensional_basic_methods {
                 let row1 = self.get_r(index1);
                 let row2 = self.get_r(index2);
 
-                self.set_r(index1, &row1);
-                self.set_r(index2, &row2);
+                self.set_r(index1, &row2);
+                self.set_r(index2, &row1);
             }
 
             /// Swap the columns at the specified indices
@@ -107,8 +107,8 @@ macro_rules! two_dimensional_basic_methods {
                 let col1 = self.get_c(index1);
                 let col2 = self.get_c(index2);
 
-                self.set_c(index1, &col1);
-                self.set_c(index2, &col2);
+                self.set_c(index1, &col2);
+                self.set_c(index2, &col1);
             }
 
             /// Append a new row to the array
