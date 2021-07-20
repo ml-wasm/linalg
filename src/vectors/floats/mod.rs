@@ -1,3 +1,4 @@
+pub mod iteration;
 pub mod new;
 pub mod serde;
 pub mod stats;
