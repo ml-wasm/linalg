@@ -111,3 +111,22 @@ const [spliced, element] = a.spliced(1);
 console.log(spliced.data, element);
 // ["a", "c"] "b"
 ```
+
+## Iteration Methods
+
+These methods allow you to perform element-wise operations on the vector.
+
+```js
+const a = new StringsVector(['a', 'b', 'c']);
+
+const b = a.map(x => x + 'x');
+console.log(b.data); // ["ax", "bx", "cx"]
+
+a.forEach(x => console.log(x));
+// a
+// b
+// c
+
+a.transform(x => x + x);
+console.log(a.data); // ["aa", "bb", "cc"]
+```

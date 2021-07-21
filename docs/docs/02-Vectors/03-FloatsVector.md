@@ -139,6 +139,25 @@ console.log(spliced.data, element);
 // [0.1, 0.3] 0.2
 ```
 
+## Iteration Methods
+
+These methods allow you to perform element-wise operations on the vector.
+
+```js
+const a = new FloatsVector([0.1, 0.2, 0.3]);
+
+const b = a.map(x => x * 3);
+console.log(b.data); // [0.30000000000000004, 0.6000000000000001, 0.8999999999999999]
+
+a.forEach(x => console.log(x));
+// 0.1
+// 0.2
+// 0.3
+
+a.transform(x => x * x);
+console.log(a.data); // [0.010000000000000002, 0.04000000000000001, 0.09]
+```
+
 ## Math Methods
 
 Methods to perform simple mathematical operations on the array.

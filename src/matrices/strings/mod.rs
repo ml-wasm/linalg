@@ -1,3 +1,5 @@
+mod iteration;
+
 use ndarray::{s, Array, Array2};
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;

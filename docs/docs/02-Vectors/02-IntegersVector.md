@@ -124,6 +124,25 @@ console.log(spliced.data, element);
 // [1, 3] 2
 ```
 
+## Iteration Methods
+
+These methods allow you to perform element-wise operations on the vector.
+
+```js
+const a = new IntegersVector([1, 2, 3]);
+
+const b = a.map(x => x * 3); 
+console.log(b.data); // [3, 6, 9]
+
+a.forEach(x => console.log(x));
+// 1
+// 2
+// 3
+
+a.transform(x => x * x);
+console.log(a.data); // [1, 4, 9]
+```
+
 ## Math Methods
 
 Methods to perform simple mathematical operations on the array.
