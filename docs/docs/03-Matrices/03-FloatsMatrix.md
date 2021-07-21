@@ -145,6 +145,30 @@ console.log(spliced.data, column.data);
 // [0.2, 0.6]
 ```
 
+## Iteration Methods
+
+These methods allow you to perform element-wise operations on the matrix.
+
+```js
+const a = new FloatsMatrix([[0.1, 0.2], [0.3, 0.4]]);
+
+const b = a.map(x => x * 3);
+console.log(b.data);
+// [[0.30000000000000004, 0.6000000000000001],
+//  [0.8999999999999999, 1.2000000000000002]]
+
+a.forEach(x => console.log(x));
+// 0.1
+// 0.2
+// 0.3
+// 0.4
+
+a.transform(x => x * x);
+console.log(a.data);
+// [[0.010000000000000002, 0.04000000000000001],
+//  [0.09, 0.16000000000000003]],
+```
+
 ## Math Methods
 
 Methods to perform simple mathematical operations on the array.

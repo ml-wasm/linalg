@@ -102,4 +102,57 @@ the operation on each column-wise.
 :::
 
 ```js
+const a = new StringsMatrix([
+  ['a', 'b', 'c'],
+  ['d', 'e', 'f'],
+]);
+const b = new StringsMatrix([
+  ['u', 'v', 'w'],
+  ['x', 'y', 'z'],
+]);
+
+// Append an element to the StringsVector
+console.log(a.appendedR(new StringsVector(['l', 'm', 'n'])).data);
+// [['a', 'b', 'c'],
+//  ['d', 'e', 'f'],
+//  ['l', 'm', 'n']]
+
+// Extend the StringsMatrix with another
+console.log(a.extendedC(b).data);
+// [['a', 'b', 'c', 'u', 'v', 'w'],
+//  ['d', 'e', 'f', 'x', 'y', 'z']]
+
+// Insert the given element at the specified index
+console.log(a.insertedR(1, new StringsVector(['l', 'm', 'n'])).data);
+// [['a', 'b', 'c'],
+//  ['l', 'm', 'n']]
+//  ['d', 'e', 'f'],
+
+// Removes an element from the specified index
+const [spliced, column] = a.splicedC(1);
+console.log(spliced.data, column.data);
+// [['a', 'c'],
+//  ['d', 'f'],
+//
+// ['b', 'e']
+```
+
+## Iteration Methods
+
+These methods allow you to perform element-wise operations on the matrix.
+
+```js
+const a = new StringsMatrix([['a', 'b'], ['c', 'd']]);
+
+const b = a.map(x => x + 'x');
+console.log(b.data); // [['ax', 'bx'], ['cx', 'dx']]
+
+a.forEach(x => console.log(x));
+// a
+// b
+// c
+// d
+
+a.transform(x => x + x);
+console.log(a.data); // [['aa', 'bb'], ['cc', 'dd']]
 ```

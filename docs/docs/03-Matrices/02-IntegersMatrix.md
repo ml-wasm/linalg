@@ -145,6 +145,25 @@ console.log(spliced.data, column.data);
 // [2, 6]
 ```
 
+## Iteration Methods
+
+These methods allow you to perform element-wise operations on the matrix.
+
+```js
+const a = new IntegersMatrix([[1, 2], [3, 4]]);
+
+const b = a.map(x => x * 3);
+console.log(b.data); // [[3, 6], [9, 12]]
+a.forEach(x => console.log(x));
+// 1
+// 2
+// 3
+// 4
+
+a.transform(x => x * x);
+console.log(a.data); // [[1, 4], [9, 16]]
+```
+
 ## Math Methods
 
 Methods to perform simple mathematical operations on the array.
