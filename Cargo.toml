@@ -4,7 +4,7 @@ description = "Linear algebra accelerated by WebAssembly"
 edition = "2018"
 license-file = "LICENSE"
 name = "linalg"
-repository = "https://github.com/wasml/wasml"
+repository = "https://github.com/ml-wasm/linalg"
 version = "0.1.0"
 
 [lib]

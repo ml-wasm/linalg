@@ -10,12 +10,12 @@ module.exports = {
   // favicon: 'img/favicon.ico',
   organizationName: 'wasml',
   projectName: 'linalg',
-  url: 'https://wasml.github.io',
+  url: 'https://ml-wasm.github.io',
   baseUrl: '/linalg/',
   trailingSlash: false,
   themeConfig: {
     navbar: {
-      title: 'wasml/linalg',
+      title: 'ml.wasm > linalg',
       // logo: {
       //   alt: 'My Site Logo',
       //   src: 'img/logo.svg',
@@ -29,7 +29,7 @@ module.exports = {
         },
         // { to: '/blog', label: 'Blog', position: 'left' }, Work on this later
         {
-          href: 'https://github.com/wasml/linalg',
+          href: 'https://github.com/ml-wasm/linalg',
           label: 'GitHub',
           position: 'right',
         },
@@ -47,7 +47,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',
-          editUrl: 'https://github.com/wasml/linalg/edit/master/docs/',
+          editUrl: 'https://github.com/ml-wasm/linalg/edit/master/docs/',
         },
         blog: {
           showReadingTime: true,
