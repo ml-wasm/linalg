@@ -6,7 +6,7 @@ title: Getting Started
 The goal of this project is to provide a **fast, easy-to-use linear algebra
 Javascript library** powered by WebAssembly, written in Rust.
 
-This project is a part of a larger project called [wasml](https://www.github.com/wasml),
+This project is a part of a larger project called [ml.wasm](https://www.github.com/ml.wasm),
 which aims to provide a complete machine learning ecosystem in JavaScript.
 
 ## Installing the package
@@ -24,7 +24,7 @@ import init, {
   Integers2d,
   Floats2d,
   Strings2d,
-} from '@wasml/linalg';
+} from '@ml.wasm/linalg';
 
 (async () => {
   // This init function sets up everything you need to use this library
