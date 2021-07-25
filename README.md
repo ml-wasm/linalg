@@ -5,24 +5,24 @@
     <strong>Linear Algebra powered by Web Assembly</strong>
   </p>
 
-  <h3>
-    <a href="https://ml-wasm.github.io/linalg">DOCS</a>
-    <span> | </span>
-    <a href="https://www.npmjs.com/package/@ml.wasm/linalg">NPM</a>
-  </h3>
-  
   <sub>This project is currently in alpha and missing some crucial features</sub>
+
+  <h3>
+    <a href="https://ml-wasm.github.io/linalg">documentation</a>
+    <span> | </span>
+    <a href="https://www.npmjs.com/package/@ml.wasm/linalg">npm</a>
+  </h3>
 </div>
 
-# Quick Start
+## Quick Start
 
 Add to your project:
 
 ``` sh
-npm i @ml.wasm/linalg
+npm install @ml.wasm/linalg
 ```
 
-Use in Javascript:
+Initializing in the browser:
 
 ``` javascript
 import init, {
