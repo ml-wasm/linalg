@@ -2,10 +2,11 @@
 authors = ["Archit Bhonsle <abhonsle2000@gmail.com>"]
 description = "Linear algebra accelerated by WebAssembly"
 edition = "2018"
+keywords = ["linear algebra", "vector", "matrix", "machine learning", "ml"]
 license = "Apache-2.0"
 name = "linalg"
 repository = "https://github.com/ml-wasm/linalg"
-version = "0.1.0"
+version = "0.1.1"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
