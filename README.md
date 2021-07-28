@@ -8,7 +8,7 @@
   <sub>This project is currently in alpha and missing some crucial features</sub>
 
   <h3>
-    <a href="https://ml-wasm.github.io/linalg">documentation</a>
+    <a href="https://ml-wasm.github.io/linalg">docs</a>
     <span> | </span>
     <a href="https://www.npmjs.com/package/@ml.wasm/linalg">npm</a>
   </h3>
@@ -16,24 +16,25 @@
 
 ## Quick Start
 
-Add to your project:
+Here, to demonstrate, we'll be using [vite](https://vitejs.dev/) to scaffold a project:
 
 ``` sh
-npm install @ml.wasm/linalg
+npm init vite@latest  # choose a simple vanilla js project
+npm i @ml.wasm/linalg
 ```
 
-Initializing in the browser:
+And add this to `main.js`:
 
-``` javascript
+```js title="main.js"
 import init, {
   initThreadPool,
-  Integers1d,
-  Floats1d,
-  Strings1d,
-  Integers2d,
-  Floats2d,
-  Strings2d,
-} from '@wasml/linalg';
+  IntegersVector,
+  FloatsVector,
+  StringsVector,
+  IntegersMatrix,
+  FloatsMatrix,
+  StringsMatrix,
+} from '@ml.wasm/linalg';
 
 (async () => {
   // This init function sets up everything you need to use this library
@@ -44,4 +45,17 @@ import init, {
 
   // All your code goes here...
 })();
+```
+
+Note that you'll have to create a `vite.config.js`:
+
+``` js title="vite.config.js"
+export default {
+  server: {
+    fs: {
+      // Allow serving files from one level up to the project root
+      allow: ['..']
+    }
+  }
+}
 ```

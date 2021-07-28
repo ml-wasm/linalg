@@ -9,21 +9,26 @@ Javascript library** powered by WebAssembly, written in Rust.
 This project is a part of a larger project called [ml.wasm](https://www.github.com/ml.wasm),
 which aims to provide a complete machine learning ecosystem in JavaScript.
 
-## Installing the package
+## Quick Start
 
-_Coming Soon_
+Here, to demonstrate, we'll be using [vite](https://vitejs.dev/) to scaffold a project:
 
-## How to use
+``` sh
+npm init vite@latest  # choose a simple vanilla js project
+npm i @ml.wasm/linalg
+```
 
-```js
+And add this to `main.js`:
+
+```js title="main.js"
 import init, {
   initThreadPool,
-  Integers1d,
-  Floats1d,
-  Strings1d,
-  Integers2d,
-  Floats2d,
-  Strings2d,
+  IntegersVector,
+  FloatsVector,
+  StringsVector,
+  IntegersMatrix,
+  FloatsMatrix,
+  StringsMatrix,
 } from '@ml.wasm/linalg';
 
 (async () => {
@@ -37,6 +42,19 @@ import init, {
 })();
 ```
 
+Note that you'll have to create a `vite.config.js`:
+
+``` js title="vite.config.js"
+export default {
+  server: {
+    fs: {
+      // Allow serving files from one level up to the project root
+      allow: ['..']
+    }
+  }
+}
+```
+
 :::warning Proper error handling not implemented yet
 
 If you are familiar with Rust, currently all the functions just "panic". This
@@ -46,4 +64,4 @@ will be fixed in the future.
 
 For more information on how to work with one dimensional arrays or vectors go
 [here](Vectors/index). For two dimensional arrays or matrices go
-[here](Vectors/index).
+[here](Matrices/index).
