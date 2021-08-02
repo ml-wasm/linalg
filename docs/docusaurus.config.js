@@ -3,7 +3,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'wasml/linalg',
+  title: 'ml.wasm > linalg',
   tagline: 'Linear Algebra powered by WebAssembly',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',

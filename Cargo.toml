@@ -6,7 +6,7 @@ keywords = ["linear algebra", "vector", "matrix", "machine learning", "ml"]
 license = "Apache-2.0"
 name = "linalg"
 repository = "https://github.com/ml-wasm/linalg"
-version = "0.1.5"
+version = "0.1.7"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
