@@ -19,3 +19,15 @@ pub struct IntegersVector {
 one_dimensional_interop_methods!(IntegersVector, i32);
 one_dimensional_basic_methods!(IntegersVector, i32);
 one_dimensional_math_methods!(IntegersVector, i32);
+
+impl IntegersVector {
+    /// Return a Int32Array representing the IntegersVector
+    pub fn to_typed_array(&self) -> js_sys::Int32Array {
+        let raw_data = self.data.as_slice().unwrap();
+        let typed_array = js_sys::Int32Array::new_with_length(self.len() as u32);
+
+        typed_array.copy_from(raw_data);
+
+        typed_array
+    }
+}
