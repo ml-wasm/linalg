@@ -23,7 +23,7 @@ two_dimensional_interop_methods!(IntegersMatrix, IntegersVector, i32);
 two_dimensional_basic_methods!(IntegersMatrix, IntegersVector, i32);
 two_dimensional_math_methods!(IntegersMatrix, IntegersVector, i32);
 
-apply_functions!(IntegersVector {
+apply_functions!(IntegersMatrix {
     abs
     "Computes the absolute value of each element",
 
@@ -40,7 +40,7 @@ apply_functions!(IntegersVector {
     "Changes the number to 0 if 0, -1 if negative, 1 if positive"
 });
 
-apply_functions_with_arg!(IntegersVector, u32 {
+apply_functions_with_arg!(IntegersMatrix, u32 {
     pow
     "Raise each element to an integer",
 
@@ -48,7 +48,7 @@ apply_functions_with_arg!(IntegersVector, u32 {
     "Raise each element to an integer, saturating at numeric bounds instead of overflowing"
 });
 
-apply_functions_with_arg_with_alias!(IntegersVector, i32 {
+apply_functions_with_arg_with_alias!(IntegersMatrix, i32 {
     add | add_constant = addConstant
     "Add an integer to each element",
 

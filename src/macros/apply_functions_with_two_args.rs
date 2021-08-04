@@ -1,6 +1,6 @@
 #[macro_export]
-macro_rules! apply_functions_with_arg {
-	($stuc:ty, $argtyp:ty {
+macro_rules! apply_functions_with_two_args {
+	($stuc:ty, $argtyp1:ty, $argtyp2:ty {
         $(
             $func:ident $(= $jsname:ident)? $doc:literal
         ),*
@@ -10,8 +10,8 @@ macro_rules! apply_functions_with_arg {
             $(
                 $(#[wasm_bindgen(js_name = $jsname)])?
                 #[doc=$doc]
-                pub fn $func(&mut self, a: $argtyp) {
-                    self.data.par_map_inplace(|x| *x = x.$func(a))
+                pub fn $func(&mut self, a: $argtyp1, b: $argtyp2) {
+                    self.data.par_map_inplace(|x| *x = x.$func(a, b))
                 }
             )*
         }
@@ -19,8 +19,8 @@ macro_rules! apply_functions_with_arg {
 }
 
 #[macro_export]
-macro_rules! apply_functions_with_arg_with_alias {
-	($stuc:ty, $argtyp:ty {
+macro_rules! apply_functions_with_two_args_with_alias {
+	($stuc:ty, $argtyp1:ty, $argtyp2:ty {
         $(
             $func:ident | $rustfunc:ident $(= $jsname:ident)? $doc:literal
         ),*
@@ -30,8 +30,8 @@ macro_rules! apply_functions_with_arg_with_alias {
             $(
                 $(#[wasm_bindgen(js_name = $jsname)])?
                 #[doc=$doc]
-                pub fn $rustfunc(&mut self, a: $argtyp) {
-                    self.data.par_map_inplace(|x| *x = x.$func(a))
+                pub fn $rustfunc(&mut self, a: $argtyp1, b: $argtyp2) {
+                    self.data.par_map_inplace(|x| *x = x.$func(a, b))
                 }
             )*
         }
