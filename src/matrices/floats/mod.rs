@@ -1,4 +1,5 @@
 pub mod iteration;
+pub mod new;
 pub mod stats;
 
 use ndarray::{s, Array, Array2, Axis};
