@@ -1,5 +1,6 @@
 use super::IntegersVector;
 use ndarray::Array1;
+use ndarray_rand::{rand_distr, RandomExt};
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -54,4 +55,49 @@ impl IntegersVector {
             }),
         }
     }
+
+    /// Create a new IntegersVector of specified length randomly in the range [INT_MIN, INT_MAX]
+    #[wasm_bindgen(js_name = "newWithRandom")]
+    pub fn new_with_random(len: usize) -> IntegersVector {
+        IntegersVector {
+            data: Array1::random(len, rand_distr::Standard),
+        }
+    }
+
+    //    /// Create a new IntegersVector of specified length randomly using Binomial
+    //    /// distribution with n - number of trials and p - probability of success
+    //    #[wasm_bindgen(js_name = "newWithRandomBinomial")]
+    //    pub fn new_with_random_binomial(len: usize, n: u64, p: u64) -> IntegersVector {
+    //        IntegersVector {
+    //            data: Array1::random(len, rand_distr::Binomial::new(n, p).unwrap()),
+    //        }
+    //    }
+    //
+    //    /// Create a new IntegersVector of specified length randomly using Geometric
+    //    /// distribution with shape paremeter p
+    //    #[wasm_bindgen(js_name = "newWithRandomGeometric")]
+    //    pub fn new_with_random_geometric(len: usize, p: f64) -> IntegersVector {
+    //        IntegersVector {
+    //            data: Array1::random(len, rand_distr::Geometric::new(p).unwrap()),
+    //        }
+    //    }
+    //
+    //    /// Create a new IntegersVector of specified length randomly using Geometric
+    //    /// distribution with shape paremeter p = 0.5
+    //    #[wasm_bindgen(js_name = "newWithRandomStandardGeometric")]
+    //    pub fn new_with_random_standard_geometric(len: usize) -> IntegersVector {
+    //        IntegersVector {
+    //            data: Array1::random(len, rand_distr::StandardGeometric),
+    //        }
+    //    }
+    //
+    //    /// Create a new IntegersVector of specified length randomly using Hypergeometric
+    //    /// distribution with n - population size, k - population with feature and
+    //    /// s - sample size
+    //    #[wasm_bindgen(js_name = "newWithRandomHypergeometric")]
+    //    pub fn new_with_random_hypergeometric(len: usize, n: u64, k: u64, s: u64) -> IntegersVector {
+    //        IntegersVector {
+    //            data: Array1::random(len, rand_distr::Hypergeometric::new(n, k, s).unwrap()),
+    //        }
+    //    }
 }
