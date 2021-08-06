@@ -4,7 +4,6 @@
 - [ ] fill
 - [ ] fold
 - [ ] add, sub, mul, div, dot between vectors and matrices
-- [ ] rand constructors using ndarray_rand
 
 # Matrices
 
