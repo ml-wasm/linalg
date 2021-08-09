@@ -8,8 +8,8 @@ use wasm_bindgen::prelude::*;
 
 use crate::{
     apply_functions, apply_functions_with_alias, apply_functions_with_arg,
-    apply_functions_with_two_args, two_dimensional_basic_methods, two_dimensional_interop_methods,
-    two_dimensional_math_methods, vectors::floats::FloatsVector,
+    apply_functions_with_two_args, matrices_sampling_methods, two_dimensional_basic_methods,
+    two_dimensional_interop_methods, two_dimensional_math_methods, vectors::floats::FloatsVector,
 };
 
 #[wasm_bindgen]
@@ -22,6 +22,7 @@ pub struct FloatsMatrix {
 two_dimensional_interop_methods!(FloatsMatrix, FloatsVector, f64);
 two_dimensional_basic_methods!(FloatsMatrix, FloatsVector, f64);
 two_dimensional_math_methods!(FloatsMatrix, FloatsVector, f64);
+matrices_sampling_methods!(FloatsMatrix);
 
 apply_functions!(FloatsMatrix {
     floor

@@ -10,6 +10,7 @@ use wasm_bindgen::prelude::*;
 use crate::{
     apply_functions, apply_functions_with_arg, apply_functions_with_arg_with_alias,
     one_dimensional_basic_methods, one_dimensional_interop_methods, one_dimensional_math_methods,
+    vectors_sampling_methods,
 };
 
 #[wasm_bindgen]
@@ -21,6 +22,7 @@ pub struct IntegersVector {
 one_dimensional_interop_methods!(IntegersVector, i32);
 one_dimensional_basic_methods!(IntegersVector, i32);
 one_dimensional_math_methods!(IntegersVector, i32);
+vectors_sampling_methods!(IntegersVector);
 
 apply_functions!(IntegersVector {
     abs
