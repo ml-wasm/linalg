@@ -7,7 +7,7 @@
 
 # Matrices
 
-- [ ] iteration methods over rows and columns (using axis_iter)
+- [x] iteration methods over rows and columns (using axis_iter)
 - [ ] fold_axis
 - [ ] diag (and set diag?)
 - [ ] reshape (using to_shape)

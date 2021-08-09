@@ -1,5 +1,8 @@
+use crate::vectors::strings::StringsVector;
+
 use super::StringsMatrix;
 use js_sys;
+use ndarray::Axis;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -32,6 +35,32 @@ impl StringsMatrix {
             js_func
                 .call1(&JsValue::NULL, &JsValue::from(x.clone()))
                 .unwrap();
+        });
+    }
+
+    #[wasm_bindgen(js_name = mapRows)]
+    pub fn map_rows(&self, js_func: js_sys::Function) {
+        self.data.map_axis(Axis(1), |x| {
+            js_func
+                .call1(&JsValue::NULL, &JsValue::from(
+                    StringsVector {
+                        data: x.to_owned()
+                    }
+                ))
+                .unwrap()
+        });
+    }
+
+    #[wasm_bindgen(js_name = mapCols)]
+    pub fn map_cols(&self, js_func: js_sys::Function) {
+        self.data.map_axis(Axis(0), |x| {
+            js_func
+                .call1(&JsValue::NULL, &JsValue::from(
+                    StringsVector {
+                        data: x.to_owned()
+                    }
+                ))
+                .unwrap()
         });
     }
 }

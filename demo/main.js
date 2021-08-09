@@ -1,10 +1,4 @@
 import init, {
-  initThreadPool,
-  IntegersVector,
-  FloatsVector,
-  StringsVector,
-  IntegersMatrix,
-  FloatsMatrix,
   StringsMatrix,
 } from '@ml.wasm/linalg';
 
@@ -13,7 +7,15 @@ import init, {
   await init();
 
   // This sets up the concurrency
-  await initThreadPool(navigator.hardwareConcurrency);
+  //await initThreadPool(navigator.hardwareConcurrency);
+  const mat = new StringsMatrix([["ads", "dsf"], ["df", "fd"]]);
+ 
+  mat.mapRows((x) => {
+    console.log(x.data);
+  });
 
-  // All your code goes here...
+  mat.mapCols((x) => {
+    console.log(x.data);
+  });
+
 })();
