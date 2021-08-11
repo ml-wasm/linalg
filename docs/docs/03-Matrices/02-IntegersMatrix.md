@@ -7,9 +7,24 @@ IntegersMatrix is an two dimensional array or a matrix of 32-bit integers.
 The following scripts assume that you have imported the `IntegersMatrix` object
 from the package and set up the threads as explained in [getting started](../).
 
+:::note
+
+Some of these have a `R` and `C` variant. `R` variant returns a IntegersVector by
+applying the operation row-wise. `C` variant returns a IntegersVector by applying
+the operation on each column-wise.
+
+:::
+
+
 ## Constructors Methods
 
 These methods are used to create new `IntegersMatrix`s.
+
+:::note
+
+Random constructors are in the [random section](#random-methods).
+
+:::
 
 ```js
 // Create a IntegersMatrix from a given JavaScript array
@@ -47,14 +62,6 @@ console.log(b.data); // [[1, 2, 3], [5, 6, 7]]
 ## Utility Methods
 
 Basic getters and setters.
-
-:::note
-
-`get`, `set` and `swap` have a `R`, `C` and a normal variant. `R` variant
-applies the operation to the specified row(s). `C` variant applies the operation
-to the specified column(s).
-
-:::
 
 ```js
 const x = new IntegersMatrix([
@@ -98,14 +105,6 @@ performing the operation while the "impure" version actually changes the array.
 `extend -> extended`,
 `insert -> inserted`,
 `splice -> spliced`
-
-:::
-
-:::note
-
-Each of these has a `R` and `C` variant. `R` variant returns a IntegersVector by
-applying the operation row-wise. `C` variant returns a IntegersVector by applying
-the operation on each column-wise.
 
 :::
 
@@ -248,4 +247,23 @@ console.log(a.maxR().data); // [3, 6]
 
 // Returns the mean of each column
 console.log(a.meanC().data); // [2, 3, 4]
+```
+
+
+## Random Methods
+
+Methods that involve randomness.
+
+```js
+const a = IntegersMatrix.newWithRandom([3, 4]);
+console.log(a.data);
+// [[-2017797909, 1475014546 , 1264840310, -94449890 ],
+//  [-1515152352, -1683870551, 1330311634, 839764448 ],
+//  [-139012909 , -962626379 , -794614158, -442566061]]
+
+const b = a.sampleC(2);
+console.log(b.data);
+// [[1475014546,  1475014546 ],
+//  [-1683870551, -1683870551],
+//  [-962626379,  -962626379 ]]
 ```

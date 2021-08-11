@@ -7,7 +7,9 @@ use wasm_bindgen::prelude::*;
 impl IntegersMatrix {
     /// Create a new IntegersMatrix of specified length randomly in the range [INT_MIN, INT_MAX]
     #[wasm_bindgen(js_name = "newWithRandom")]
-    pub fn new_with_random(row: usize, col: usize) -> IntegersMatrix {
+    pub fn new_with_random(size: js_sys::Array) -> IntegersMatrix {
+        let row = size.get(0).as_f64().unwrap() as usize;
+        let col = size.get(0).as_f64().unwrap() as usize;
         IntegersMatrix {
             data: Array2::random((row, col), rand_distr::Standard),
         }

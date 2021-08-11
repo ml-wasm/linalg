@@ -9,7 +9,7 @@ use wasm_bindgen::prelude::*;
 use crate::{
     apply_functions, apply_functions_with_alias, apply_functions_with_arg,
     apply_functions_with_two_args, one_dimensional_basic_methods, one_dimensional_interop_methods,
-    one_dimensional_math_methods,
+    one_dimensional_math_methods, vectors_sampling_methods,
 };
 
 #[wasm_bindgen]
@@ -21,6 +21,7 @@ pub struct FloatsVector {
 one_dimensional_interop_methods!(FloatsVector, f64);
 one_dimensional_basic_methods!(FloatsVector, f64);
 one_dimensional_math_methods!(FloatsVector, f64);
+vectors_sampling_methods!(FloatsVector);
 
 apply_functions!(FloatsVector {
     floor

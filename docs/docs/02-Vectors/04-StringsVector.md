@@ -74,17 +74,19 @@ x.swap(0, 2);
 console.log(x.data); // ["c", "e", "a"]
 ```
 
-More complex methods used to manipulate the `StringsVector`. Each of these
-methods has two versions. The "pure" version returns the result of performing
-the operation while the "impure" version actually changes the array.
+More complex methods used to manipulate the `StringsVector`.
 
-| Pure    | Impure   |
-| ------- | -------- |
-| reverse | reversed |
-| append  | appended |
-| extend  | extended |
-| insert  | inserted |
-| splice  | spliced  |
+:::note
+
+Each of these methods has two versions. The "pure" version returns the result of
+performing the operation while the "impure" version actually changes the array.
+
+`append -> appended`,
+`extend -> extended`,
+`insert -> inserted`,
+`splice -> spliced`
+
+:::
 
 ```js
 const a = new StringsVector(['a', 'b', 'c']);

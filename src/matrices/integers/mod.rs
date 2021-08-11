@@ -9,8 +9,8 @@ use wasm_bindgen::prelude::*;
 
 use crate::{
     apply_functions, apply_functions_with_arg, apply_functions_with_arg_with_alias,
-    two_dimensional_basic_methods, two_dimensional_interop_methods, two_dimensional_math_methods,
-    vectors::integers::IntegersVector,
+    matrices_sampling_methods, two_dimensional_basic_methods, two_dimensional_interop_methods,
+    two_dimensional_math_methods, vectors::integers::IntegersVector,
 };
 
 #[wasm_bindgen]
@@ -23,6 +23,7 @@ pub struct IntegersMatrix {
 two_dimensional_interop_methods!(IntegersMatrix, IntegersVector, i32);
 two_dimensional_basic_methods!(IntegersMatrix, IntegersVector, i32);
 two_dimensional_math_methods!(IntegersMatrix, IntegersVector, i32);
+matrices_sampling_methods!(IntegersMatrix);
 
 apply_functions!(IntegersMatrix {
     abs
