@@ -7,6 +7,14 @@ StringsMatrix is a two dimensional array or a matrix of 32-bit integers.
 The following scripts assume that you have imported the `StringsMatrix` object
 from the package and set up the threads as explained in [getting started](../).
 
+:::note
+
+Each of these have a `R` and `C` variant. `R` variant returns a StringsVector by
+applying the operation row-wise. `C` variant returns a StringsVector by applying
+the operation on each column-wise.
+
+:::
+
 ## Constructors Methods
 
 These methods are used to create new `StringsMatrix`s.
@@ -42,14 +50,6 @@ console.log(b.data); // [["a", "b", "c"], ["d", "e", "f"]]
 ## Utility Methods
 
 Basic getters and setters.
-
-:::note
-
-`get`, `set` and `swap` have a `R`, `C` and a normal variant. `R` variant
-applies the operation to the specified row(s). `C` variant applies the operation
-to the specified column(s).
-
-:::
 
 ```js
 const x = new StringsMatrix([["a", "b", "c"], ["d", "e", "f"]]);
@@ -90,14 +90,6 @@ performing the operation while the "impure" version actually changes the array.
 `extend  -> extended`,
 `insert  -> inserted`,
 `splice  -> spliced`
-
-:::
-
-:::note
-
-Each of these has a `R` and `C` variant. `R` variant returns a StringsVector by
-applying the operation row-wise. `C` variant returns a StringsVector by applying
-the operation on each column-wise.
 
 :::
 

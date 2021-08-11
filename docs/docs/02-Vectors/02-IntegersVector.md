@@ -11,6 +11,12 @@ from the package and set up the threads as explained in [getting started](../).
 
 These methods are used to create new `IntegersVector`s.
 
+:::note
+
+Random constructors are in the [random section](#random-methods).
+
+:::
+
 ```js
 // Create an IntegersVector from a given JavaScript array
 const a = new IntegersVector([1, 2, 3, 4, 5]);
@@ -86,17 +92,19 @@ x.swap(0, 2);
 console.log(x.data); // [3, 7, 1]
 ```
 
-More complex methods used to manipulate the `IntegersVector`. Each of these
-methods has two versions. The "pure" version returns the result of performing
-the operation while the "impure" version actually changes the array.
+More complex methods used to manipulate the `IntegersVector`.
 
-| Pure    | Impure   |
-| ------- | -------- |
-| reverse | reversed |
-| append  | appended |
-| extend  | extended |
-| insert  | inserted |
-| splice  | spliced  |
+:::note
+
+Each of these methods has two versions. The "pure" version returns the result of
+performing the operation while the "impure" version actually changes the array.
+
+`append -> appended`,
+`extend -> extended`,
+`insert -> inserted`,
+`splice -> spliced`
+
+:::
 
 ```js
 const a = new IntegersVector([1, 2, 3]);
@@ -187,4 +195,18 @@ console.log(a.max()); // 3
 
 // Return the mean of all the elements in the array
 console.log(a.mean()); // 2
+```
+
+## Random Methods
+
+Methods that involve randomness.
+
+```js
+const a = IntegersVector.newWithRandom(5);
+console.log(a.data);
+// [-280599903, -1829359186, 7232578, -2034069497, -1238556954]
+
+const b = a.sample(3);
+console.log(b.data);
+// [-1238556954, -280599903, 7232578]
 ```

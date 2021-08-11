@@ -11,6 +11,12 @@ from the package and set up the threads as explained in [getting started](../).
 
 These methods are used to create new `FloatsVector`s.
 
+:::note
+
+Random constructors are in the [random section](#random-methods).
+
+:::
+
 ```js
 // Create a FloatsVector from a given JavaScript array
 const a = new FloatsVector([1, 2, 3, 4, 5]);
@@ -101,17 +107,19 @@ x.swap(0, 2);
 console.log(x.data); // [3, 7, 1]
 ```
 
-More complex methods used to manipulate the `FloatsVector`. Each of these
-methods has two versions. The "pure" version returns the result of performing
-the operation while the "impure" version actually changes the array.
+More complex methods used to manipulate the `FloatsVector`.
 
-| Pure    | Impure   |
-| ------- | -------- |
-| reverse | reversed |
-| append  | appended |
-| extend  | extended |
-| insert  | inserted |
-| splice  | spliced  |
+:::note
+
+Each of these methods has two versions. The "pure" version returns the result of
+performing the operation while the "impure" version actually changes the array.
+
+`append -> appended`,
+`extend -> extended`,
+`insert -> inserted`,
+`splice -> spliced`
+
+:::
 
 ```js
 const a = new FloatsVector([0.1, 0.2, 0.3]);
@@ -208,4 +216,106 @@ console.log(a.std(0)); // 0.0816496580927726
 
 // Return the variance of the array
 console.log(a.var(1)); // 0.009999999999999997
+```
+
+## Random Methods
+
+Methods that involve randomness.
+
+```js
+const a = FloatsVector.newWithRandom(5);
+console.log(a.data);
+// [0.34099948653292644, 0.5917974289682977, 0.6106158620616635, 0.23569474303579374, 0.5282766210914832]
+
+const b = FloatsVector.newWithRandomBeta(5, 2, 5);
+console.log(b.data);
+// [0.23096671212947778, 0.3534113458857726, 0.34475362808214677, 0.3933605194453189, 0.4257499695718641]
+
+const c = FloatsVector.newWithRandomCauchy(5, 2, 5);
+console.log(c.data);
+// [-10.259169814528763, 2.2570224421228415, -0.5143187859414864, -3.566078787268461, 1.8881158135056801]
+
+const d = FloatsVector.newWithRandomChiSquared(5, 11);
+console.log(d.data);
+// [12.540935152190382, 11.870956625621746, 17.77216830488515, 10.783752732928962, 10.664649797233045]
+
+const e = FloatsVector.newWithRandomExp(5, 10);
+console.log(e.data);
+// [0.1582298816595742, 0.15597280990902898, 0.026172146240797518, 0.033239085350025364, 0.07938556756009543]
+
+const f = FloatsVector.newWithRandomExp1(5);
+console.log(f.data);
+// [0.3786935465784936, 0.324525176947993, 1.0327496064187238, 0.08707228389123019, 1.4594054734003976]
+
+const g = FloatsVector.newWithRandomFisher(5, 2, 32);
+console.log(g.data);
+// [0.3074038581481312, 2.1847693566847393, 0.2276554651866491, 0.1163362059260453, 0.6359674157651448]
+
+const h = FloatsVector.newWithRandomGamma(5, 2, 5);
+console.log(h.data);
+// [13.64534682579972, 13.18225900805788, 10.813782133484146, 12.138039285872178, 5.944892095380422]
+
+const i = FloatsVector.newWithRandomInverseGaussian(5, 2, 5);
+console.log(i.data);
+// [2.271010640745854, 2.033124138574522, 3.913079484773854, 1.505314818081629, 0.6226851876937998]
+
+const j = FloatsVector.newWithRandomLogNormal(5, 2, 3);
+console.log(j.data);
+// [4.657210763636486, 66.24632860255005, 20.613278570556297, 10492.633098375172, 39.12513559580575]
+
+const k = FloatsVector.newWithRandomNormal(5, 2, 3);
+console.log(k.data);
+// [0.39029435201635665, 3.27261609644719, 5.0629281791580505, 0.27925119369574114, 5.240239044741968]
+
+const l = FloatsVector.newWithRandomNormalInverseGaussian(5, 3, 2);
+console.log(l.data);
+// [1.2097230563868009, 0.9542971768376568, 0.12535857990674565, 0.9559384049858257, 1.0198942781079443]
+
+const m = FloatsVector.newWithRandomOpen01(5);
+console.log(m.data);
+// [0.14561860008297822, 0.2078389740691543, 0.518045179245913, 0.5737861058411688, 0.7382741221752666]
+
+const n = FloatsVector.newWithRandomOpenClosed01(5);
+console.log(n.data);
+// [0.9188955843628368, 0.319868332534298, 0.44071331349815046, 0.3528910186300348, 0.8702363940864016]
+
+const o = FloatsVector.newWithRandomPERT(5, 0, 5, 2.5);
+console.log(o.data);
+// [0.22585318866399032, 3.600397861643679, 0.9194109223130829, 2.2344645171396156, 1.9741550812422148]
+
+const p = FloatsVector.newWithRandomPERTwithShape(5, 0, 5, 2.5, 3);
+console.log(p.data);
+// [3.9604520876027465, 4.088791843088483, 1.5617571788323033, 3.436157392852803, 2.0772133687604]
+
+const r = FloatsVector.newWithRandomPareto(5, 1, 2);
+console.log(r.data);
+// [1.1307878092838028, 1.0069139977625745, 1.1074903396292302, 1.060290197461119, 1.0271930755716328]
+
+const s = FloatsVector.newWithRandomPoisson(5, 2.0);
+console.log(s.data);
+// [1, 2, 1, 1, 1]
+
+const t = FloatsVector.newWithRandomStandardNormal(5);
+console.log(t.data);
+// [-1.174592862530223, -1.6549897461536043, -0.39595930094841264, 0.6132371623244752, -0.7785965936342404]
+
+const u = FloatsVector.newWithRandomStudentT(5, 11);
+console.log(u.data);
+// [-0.5892888945409621, 0.058722742800470386, 0.2806955947923983, 1.6907601263659682, 1.6528920846027841]
+
+const v = FloatsVector.newWithRandomTriangular(5, 0, 5, 2.5);
+console.log(v.data);
+// [1.1120111694995478, 4.0989948710773065, 2.802263571151345, 1.0294591379745555, 0.9801948864580505]
+
+const w = FloatsVector.newWithRandomUniform(5, -5, 5);
+console.log(w.data);
+// [1.1120111694995478, 4.0989948710773065, 2.802263571151345, 1.0294591379745555, 0.9801948864580505]
+
+const x = FloatsVector.newWithRandomWeibull(5, 1, 10);
+console.log(x.data);
+// [0.6117699677190211, 0.8563173903147892, 0.8959745267683338, 1.1108808965201318, 1.092721654565621]
+
+const aa = a.sample(3);
+console.log(aa.data);
+// [0.02612549959263477, 0.31168488926149907, 0.77341724202506]
 ```
