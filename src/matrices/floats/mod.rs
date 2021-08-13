@@ -1,6 +1,7 @@
 pub mod iteration;
 pub mod new;
 pub mod stats;
+pub mod utils;
 
 use ndarray::{s, Array, Array2, Axis};
 use serde::{Deserialize, Serialize};

@@ -1,6 +1,7 @@
 mod iteration;
 mod new;
 mod stats;
+mod utils;
 
 use ndarray::{s, Array, Array2, Axis};
 use serde::{Deserialize, Serialize};

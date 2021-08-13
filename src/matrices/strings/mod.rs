@@ -1,4 +1,5 @@
 mod iteration;
+mod utils;
 
 use ndarray::{s, Array, Array2};
 use serde::{Deserialize, Serialize};
