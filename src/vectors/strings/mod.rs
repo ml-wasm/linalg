@@ -1,6 +1,7 @@
 pub mod iteration;
 pub mod new;
 pub mod serde;
+pub mod utils;
 
 use ndarray::{arr1, s, Array1, Axis};
 use wasm_bindgen::prelude::*;
