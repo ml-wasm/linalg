@@ -14,3 +14,20 @@ pub use wasm_bindgen_rayon::init_thread_pool;
 pub fn start() {
     utils::set_panic_hook();
 }
+
+pub enum Vector {
+    Integers(vectors::integers::IntegersVector),
+    Floats(vectors::floats::FloatsVector),
+    Strings(vectors::strings::StringsVector),
+}
+
+pub enum Matrix {
+    Integers(matrices::integers::IntegersMatrix),
+    Floats(matrices::floats::FloatsMatrix),
+    Strings(matrices::strings::StringsMatrix),
+}
+
+pub enum Linalg {
+    Vector(Vector),
+    Matrix(Matrix),
+}
