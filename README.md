@@ -20,6 +20,7 @@ Here, to demonstrate, we'll be using [vite](https://vitejs.dev/) to scaffold a p
 
 ``` sh
 npm init vite@latest  # choose a simple vanilla js project
+npm i vite-plugin-cross-origin-isolation
 npm i @ml.wasm/linalg
 ```
 
@@ -50,10 +51,14 @@ import init, {
 Note that you'll have to create a `vite.config.js`:
 
 ``` js title="vite.config.js"
+import crossOriginIsolation from 'vite-plugin-cross-origin-isolation'
+
 export default {
+  plugins: [
+    crossOriginIsolation()
+  ],
   server: {
     fs: {
-      // Allow serving files from one level up to the project root
       allow: ['..']
     }
   }
