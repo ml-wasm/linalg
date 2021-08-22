@@ -16,6 +16,7 @@ use crate::{
 };
 
 #[wasm_bindgen]
+#[derive(Clone)]
 pub struct FloatsVector {
     #[wasm_bindgen(skip)]
     pub data: Array1<f64>,

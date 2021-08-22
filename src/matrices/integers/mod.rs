@@ -15,7 +15,7 @@ use crate::{
 };
 
 #[wasm_bindgen]
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct IntegersMatrix {
     #[wasm_bindgen(skip)]
     pub data: Array2<i32>,

@@ -9,6 +9,7 @@ use wasm_bindgen::prelude::*;
 use crate::{one_dimensional_basic_methods, one_dimensional_interop_methods};
 
 #[wasm_bindgen]
+#[derive(Clone)]
 pub struct StringsVector {
     #[wasm_bindgen(skip)]
     pub data: Array1<String>,

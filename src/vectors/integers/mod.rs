@@ -15,6 +15,7 @@ use crate::{
 };
 
 #[wasm_bindgen]
+#[derive(Clone)]
 pub struct IntegersVector {
     #[wasm_bindgen(skip)]
     pub data: Array1<i32>,
