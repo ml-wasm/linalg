@@ -1,6 +1,6 @@
 use super::FloatsMatrix;
-use ndarray::{parallel::prelude::*, Axis};
-use ndarray_stats::QuantileExt;
+use ndarray::{ArrayView1, Axis, parallel::prelude::*};
+use ndarray_stats::{QuantileExt, SummaryStatisticsExt};
 use wasm_bindgen::prelude::*;
 
 use crate::vectors::floats::FloatsVector;
@@ -85,6 +85,39 @@ impl FloatsMatrix {
         }
     }
 
+    #[wasm_bindgen(js_name = weightedMean)]
+    pub fn weighted_mean(&self, weights: &FloatsMatrix) -> f64 {
+        self.data.weighted_mean(&weights.data).unwrap()
+    }
+
+    #[wasm_bindgen(js_name = weightedMeanR)]
+    pub fn weighted_mean_r(&self, weights: &FloatsVector) -> FloatsVector {
+        let mut vec : Vec<f64> = Vec::new();
+        self.data
+            .axis_iter(Axis(0))
+            .into_par_iter()
+            .map(|x| x.weighted_mean(&ArrayView1::from(&weights.data)).unwrap())
+            .collect_into_vec(&mut vec);
+
+        FloatsVector {
+            data: ndarray::Array1::from_vec(vec)
+        }
+    }
+
+    #[wasm_bindgen(js_name = weightedMeanC)]
+    pub fn weighted_mean_c(&self, weights: &FloatsVector) -> FloatsVector {
+        let mut vec : Vec<f64> = Vec::new();
+        self.data
+            .axis_iter(Axis(1))
+            .into_par_iter()
+            .map(|x| x.weighted_mean(&ArrayView1::from(&weights.data)).unwrap())
+            .collect_into_vec(&mut vec);
+
+        FloatsVector {
+            data: ndarray::Array1::from_vec(vec)
+        }
+    }
+
     /// Get the var of all the elements in the array
     #[wasm_bindgen]
     pub fn var(&self, dof: f64) -> f64 {
@@ -107,6 +140,11 @@ impl FloatsMatrix {
         }
     }
 
+    /// Get weighted variance of all elements in matrix
+    pub fn weighted_var(&self, weights: &FloatsMatrix, dof: f64) -> f64 {
+        self.data.weighted_var(&weights.data, dof).unwrap()
+    }
+
     /// Get the mean of all the elements in the array
     #[wasm_bindgen(js_name = std)]
     pub fn std(&self, dof: f64) -> f64 {
@@ -127,5 +165,10 @@ impl FloatsMatrix {
         FloatsVector {
             data: self.data.std_axis(Axis(1), dof),
         }
+    }
+
+    /// get weighted std dev of all elements
+    pub fn weighted_std(&self, weights: &FloatsMatrix, dof: f64) -> f64 {
+        self.data.weighted_std(&weights.data, dof).unwrap()
     }
 }
