@@ -5,12 +5,14 @@ pub mod stats;
 pub mod utils;
 
 use ndarray::{arr1, s, Array1, Axis};
+use std::ops::*;
 use wasm_bindgen::prelude::*;
 
 use crate::{
     apply_functions, apply_functions_with_alias, apply_functions_with_arg,
-    apply_functions_with_two_args, one_dimensional_basic_methods, one_dimensional_interop_methods,
-    one_dimensional_math_methods, vectors_sampling_methods,
+    apply_functions_with_arg_with_alias, apply_functions_with_two_args,
+    one_dimensional_basic_methods, one_dimensional_interop_methods, one_dimensional_math_methods,
+    vectors_sampling_methods,
 };
 
 #[wasm_bindgen]
@@ -124,6 +126,20 @@ apply_functions_with_arg!(FloatsVector, f64 {
 
     atan2
     "Computes the four quadrant arctangent of the element"
+});
+
+apply_functions_with_arg_with_alias!(FloatsVector, f64 {
+    add | add_constant = addConstant
+    "Add an float to each element",
+
+    sub | sub_constant = subConstant
+    "Subtract an float from each element",
+
+    mul | mul_constant = mulConstant
+    "Multiply an float to each element",
+
+    div | div_constant = divConstant
+    "Divide each element by an float"
 });
 
 apply_functions_with_arg!(FloatsVector, i32 {
