@@ -141,6 +141,7 @@ impl FloatsMatrix {
     }
 
     /// Get weighted variance of all elements in matrix
+    #[wasm_bindgen(js_name = weightedVar)]
     pub fn weighted_var(&self, weights: &FloatsMatrix, dof: f64) -> f64 {
         self.data.weighted_var(&weights.data, dof).unwrap()
     }
@@ -168,6 +169,7 @@ impl FloatsMatrix {
     }
 
     /// get weighted std dev of all elements
+    #[wasm_bindgen(js_name = weightedStd)]
     pub fn weighted_std(&self, weights: &FloatsMatrix, dof: f64) -> f64 {
         self.data.weighted_std(&weights.data, dof).unwrap()
     }

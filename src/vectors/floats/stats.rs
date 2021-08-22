@@ -48,6 +48,7 @@ impl FloatsVector {
     }
 
     /// Get weighted variance
+    #[wasm_bindgen(js_name = weightedVar)]
     pub fn weighted_var(&self, weights: &FloatsVector, ddof: f64) -> f64 {
         self.data.weighted_var(&weights.data, ddof).unwrap()
     }
@@ -58,6 +59,7 @@ impl FloatsVector {
     }
 
     /// Get weighted standard deviation
+    #[wasm_bindgen(js_name = weightedStd)]
     pub fn weighted_std(&self, weights: &FloatsVector, ddof: f64) -> f64 {
         self.data.weighted_std(&weights.data, ddof).unwrap()
     }
