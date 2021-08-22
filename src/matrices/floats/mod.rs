@@ -5,12 +5,14 @@ pub mod utils;
 
 use ndarray::{s, Array, Array2, Axis};
 use serde::{Deserialize, Serialize};
+use std::ops::*;
 use wasm_bindgen::prelude::*;
 
 use crate::{
     apply_functions, apply_functions_with_alias, apply_functions_with_arg,
-    apply_functions_with_two_args, matrices_sampling_methods, two_dimensional_basic_methods,
-    two_dimensional_interop_methods, two_dimensional_math_methods, vectors::floats::FloatsVector,
+    apply_functions_with_arg_with_alias, apply_functions_with_two_args, matrices_sampling_methods,
+    two_dimensional_basic_methods, two_dimensional_interop_methods, two_dimensional_math_methods,
+    vectors::floats::FloatsVector,
 };
 
 #[wasm_bindgen]
@@ -130,6 +132,20 @@ apply_functions_with_arg!(FloatsMatrix, f64 {
 apply_functions_with_arg!(FloatsMatrix, i32 {
     powi
     "Raises each element to an integer"
+});
+
+apply_functions_with_arg_with_alias!(FloatsMatrix, f64 {
+    add | add_constant = addConstant
+    "Add an float to each element",
+
+    sub | sub_constant = subConstant
+    "Subtract an float from each element",
+
+    mul | mul_constant = mulConstant
+    "Multiply an float to each element",
+
+    div | div_constant = divConstant
+    "Divide each element by an float"
 });
 
 apply_functions_with_alias!(FloatsMatrix {
