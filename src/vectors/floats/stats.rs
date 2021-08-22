@@ -1,5 +1,5 @@
 use super::FloatsVector;
-use ndarray_stats::QuantileExt;
+use ndarray_stats::{QuantileExt, SummaryStatisticsExt};
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -17,6 +17,16 @@ impl FloatsVector {
     /// Get the mean of all the elements in the array
     pub fn mean(&self) -> f64 {
         self.data.mean().unwrap()
+    }
+
+    /// Get weighted mean of elements
+    pub fn weighted_mean(&self, weights: &FloatsVector) -> f64 {
+        self.data.weighted_mean(&weights.data).unwrap()
+    }
+
+    /// Get weighted sum
+    pub fn weighted_sum(&self, weights: &FloatsVector) -> f64 {
+        self.data.weighted_sum(&weights.data).unwrap()
     }
 
     /// Get median off all elements
@@ -37,8 +47,18 @@ impl FloatsVector {
         self.data.var(ddof)
     }
 
+    /// Get weighted variance
+    pub fn weighted_var(&self, weights: &FloatsVector, ddof: f64) -> f64 {
+        self.data.weighted_var(&weights.data, ddof).unwrap()
+    }
+
     /// Get the mean of all the elements in the array
     pub fn std(&self, ddof: f64) -> f64 {
         self.data.std(ddof)
+    }
+
+    /// Get weighted standard deviation
+    pub fn weighted_std(&self, weights: &FloatsVector, ddof: f64) -> f64 {
+        self.data.weighted_std(&weights.data, ddof).unwrap()
     }
 }

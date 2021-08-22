@@ -1,6 +1,6 @@
 # General
 
-- [ ] vectors to matrices and vice versa (using into_dimensionality)
+- [x] vectors to matrices and vice versa (using into_dimensionality)
 - [ ] fill
 - [ ] fold
 - [ ] add, sub, mul, div, dot between vectors and matrices
