@@ -14,8 +14,8 @@
 - [ ] constructors
   - [ ] eye
   - [ ] all the constructors for one dimensional arrays adapated for 2d with **same names**
-    - [ ] from_elem
-    - [ ] zeros
+    - [x] from_elem
+    - [x] zeros
     - [ ] ones
     - [ ] from_simple_shape_fn
     - [ ] from_shape_fn

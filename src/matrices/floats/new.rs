@@ -5,6 +5,22 @@ use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 impl FloatsMatrix {
+    /// Create new matrix of given size with give element
+    #[wasm_bindgen(js_name = newWithElement)]
+    pub fn new_with_elem(num_rows: usize, num_cols: usize, element: f64) -> FloatsMatrix {
+        FloatsMatrix {
+            data: Array2::from_elem([num_rows, num_cols], element)
+        }
+    }
+
+    /// Create new matrix of given size initialize to 0
+    #[wasm_bindgen(js_name = newWithZeroes)]
+    pub fn new_with_zeros(num_rows: usize, num_cols: usize) -> FloatsMatrix {
+        FloatsMatrix {
+            data: Array2::from_elem([num_rows, num_cols], 0.0)
+        }
+    }
+
     /// Create a new FloatsMatrix of specified length randomly in the range (0, 1]
     #[wasm_bindgen(js_name = "newWithRandom")]
     pub fn new_with_random(size: js_sys::Array) -> FloatsMatrix {

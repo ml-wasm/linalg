@@ -5,6 +5,22 @@ use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 impl IntegersMatrix {
+    /// Create new matrix of given size with give element
+    #[wasm_bindgen(js_name = newWithElement)]
+    pub fn new_with_elem(num_rows: usize, num_cols: usize, element: i32) -> IntegersMatrix {
+        IntegersMatrix {
+            data: Array2::from_elem([num_rows, num_cols], element)
+        }
+    }
+
+    /// Create new matrix of given size initialize to 0
+    #[wasm_bindgen(js_name = newWithZeroes)]
+    pub fn new_with_zeros(num_rows: usize, num_cols: usize) -> IntegersMatrix {
+        IntegersMatrix {
+            data: Array2::from_elem([num_rows, num_cols], 0)
+        }
+    }
+
     /// Create a new IntegersMatrix of specified length randomly in the range [INT_MIN, INT_MAX]
     #[wasm_bindgen(js_name = "newWithRandom")]
     pub fn new_with_random(size: js_sys::Array) -> IntegersMatrix {

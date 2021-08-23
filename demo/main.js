@@ -8,7 +8,7 @@ import init, {
 
   // This sets up the concurrency
   //await initThreadPool(navigator.hardwareConcurrency);
-  const mat = new FloatsMatrix([[1, 3, 4], [4, 7, 3]]);
+  const mat = FloatsMatrix.newWithElement(2, 3, 4);
 
   const vec = mat.toVector();
 
