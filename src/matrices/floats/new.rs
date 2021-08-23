@@ -17,7 +17,23 @@ impl FloatsMatrix {
     #[wasm_bindgen(js_name = newWithZeroes)]
     pub fn new_with_zeros(num_rows: usize, num_cols: usize) -> FloatsMatrix {
         FloatsMatrix {
-            data: Array2::from_elem([num_rows, num_cols], 0.0)
+            data: Array2::zeros([num_rows, num_cols])
+        }
+    }
+
+    /// Create new matrix of give size initialized to 1
+    #[wasm_bindgen(js_name = newWithOnes)]
+    pub fn new_with_ones(num_rows: usize, num_cols: usize) -> FloatsMatrix {
+        FloatsMatrix {
+            data: Array2::ones([num_rows, num_cols])
+        }
+    }
+    
+    /// Create new identity matrix of size n
+    #[wasm_bindgen(js_name = newEye)]
+    pub fn new_eye(size: usize) -> FloatsMatrix {
+        FloatsMatrix {
+            data: Array2::eye(size)
         }
     }
 

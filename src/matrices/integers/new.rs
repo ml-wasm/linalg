@@ -17,10 +17,18 @@ impl IntegersMatrix {
     #[wasm_bindgen(js_name = newWithZeroes)]
     pub fn new_with_zeros(num_rows: usize, num_cols: usize) -> IntegersMatrix {
         IntegersMatrix {
-            data: Array2::from_elem([num_rows, num_cols], 0)
+            data: Array2::zeros([num_rows, num_cols])
         }
     }
 
+    /// Create new matrix of give size initialized to 1
+    #[wasm_bindgen(js_name = newWithOnes)]
+    pub fn new_with_ones(num_rows: usize, num_cols: usize) -> IntegersMatrix {
+        IntegersMatrix {
+            data: Array2::ones([num_rows, num_cols])
+        }
+    }
+    
     /// Create a new IntegersMatrix of specified length randomly in the range [INT_MIN, INT_MAX]
     #[wasm_bindgen(js_name = "newWithRandom")]
     pub fn new_with_random(size: js_sys::Array) -> IntegersMatrix {
@@ -28,6 +36,14 @@ impl IntegersMatrix {
         let col = size.get(0).as_f64().unwrap() as usize;
         IntegersMatrix {
             data: Array2::random((row, col), rand_distr::Standard),
+        }
+    }
+
+    /// Create new identity matrix of size n
+    #[wasm_bindgen(js_name = newEye)]
+    pub fn new_eye(size: usize) -> IntegersMatrix {
+        IntegersMatrix {
+            data: Array2::eye(size)
         }
     }
 
