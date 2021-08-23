@@ -1,5 +1,5 @@
 use super::FloatsMatrix;
-use ndarray::{ArrayView1, Axis, parallel::prelude::*};
+use ndarray::{Array1, ArrayView1, Axis, parallel::prelude::*};
 use ndarray_stats::{QuantileExt, SummaryStatisticsExt};
 use wasm_bindgen::prelude::*;
 
@@ -100,7 +100,7 @@ impl FloatsMatrix {
             .collect_into_vec(&mut vec);
 
         FloatsVector {
-            data: ndarray::Array1::from_vec(vec)
+            data: Array1::from_vec(vec)
         }
     }
 
@@ -114,7 +114,7 @@ impl FloatsMatrix {
             .collect_into_vec(&mut vec);
 
         FloatsVector {
-            data: ndarray::Array1::from_vec(vec)
+            data: Array1::from_vec(vec)
         }
     }
 
@@ -146,6 +146,36 @@ impl FloatsMatrix {
         self.data.weighted_var(&weights.data, dof).unwrap()
     }
 
+    /// Get weighted variance of all columns
+    #[wasm_bindgen(js_name = weightedVarC)]
+    pub fn weighted_var_c(&self, weights: &FloatsVector, dof: f64) -> FloatsVector {
+        let mut vec : Vec<f64> = Vec::new();
+        self.data
+            .axis_iter(Axis(0))
+            .into_par_iter()
+            .map(|x| x.weighted_var(&ArrayView1::from(&weights.data), dof).unwrap())
+            .collect_into_vec(&mut vec);
+
+        FloatsVector {
+            data: Array1::from_vec(vec)
+        }
+    }
+ 
+    /// Get weighted variance of all rows
+    #[wasm_bindgen(js_name = weightedVarR)]
+    pub fn weighted_var_r(&self, weights: &FloatsVector, dof: f64) -> FloatsVector {
+        let mut vec : Vec<f64> = Vec::new();
+        self.data
+            .axis_iter(Axis(1))
+            .into_par_iter()
+            .map(|x| x.weighted_var(&ArrayView1::from(&weights.data), dof).unwrap())
+            .collect_into_vec(&mut vec);
+
+        FloatsVector {
+            data: Array1::from_vec(vec)
+        }
+    }
+
     /// Get the mean of all the elements in the array
     #[wasm_bindgen(js_name = std)]
     pub fn std(&self, dof: f64) -> f64 {
@@ -172,5 +202,35 @@ impl FloatsMatrix {
     #[wasm_bindgen(js_name = weightedStd)]
     pub fn weighted_std(&self, weights: &FloatsMatrix, dof: f64) -> f64 {
         self.data.weighted_std(&weights.data, dof).unwrap()
+    }
+
+    /// Get weighted standard deviation of all columns
+    #[wasm_bindgen(js_name = weightedStdC)]
+    pub fn weighted_std_c(&self, weights: &FloatsVector, dof: f64) -> FloatsVector {
+        let mut vec : Vec<f64> = Vec::new();
+        self.data
+            .axis_iter(Axis(0))
+            .into_par_iter()
+            .map(|x| x.weighted_std(&ArrayView1::from(&weights.data), dof).unwrap())
+            .collect_into_vec(&mut vec);
+
+        FloatsVector {
+            data: Array1::from_vec(vec)
+        }
+    }
+ 
+    /// Get weighted standard deviation of all rows
+    #[wasm_bindgen(js_name = weightedStdR)]
+    pub fn weighted_std_r(&self, weights: &FloatsVector, dof: f64) -> FloatsVector {
+        let mut vec : Vec<f64> = Vec::new();
+        self.data
+            .axis_iter(Axis(1))
+            .into_par_iter()
+            .map(|x| x.weighted_std(&ArrayView1::from(&weights.data), dof).unwrap())
+            .collect_into_vec(&mut vec);
+
+        FloatsVector {
+            data: Array1::from_vec(vec)
+        }
     }
 }
