@@ -1,4 +1,5 @@
 import init, {
+  initThreadPool,
   FloatsMatrix,
 } from '@ml.wasm/linalg';
 
@@ -7,17 +8,31 @@ import init, {
   await init();
 
   // This sets up the concurrency
-  //await initThreadPool(navigator.hardwareConcurrency);
-  const mat = FloatsMatrix.newWithElement(2, 3, 4);
+  await initThreadPool(navigator.hardwareConcurrency);
 
-  const vec = mat.toVector();
+  const response = await fetch('./mat.csv');
 
-  const new_mat = vec.toMatrix(3, 2);
- 
-  console.log("Matrix");
-  console.log(mat.data);
-  console.log("Vector");
-  console.log(vec.data);
-  console.log("New mat");
-  console.log(new_mat.data);
+  // First try with this
+  const stream = response.body;
+  console.log(stream);
+  // const a = FloatsMatrix.newFromCSV(stream);
+  // console.log(a.data);
+
+  // If this doesn't work then just pass the entire text to the function
+  // const text = await response.text();
+  // console.log(text);
+  // const a = FloatsMatrix.newFromCSV(text);
+  // console.log(a.data);
 })();
+
+// Ignore this for now
+// const btn = document.getElementById("file-picker");
+// btn.addEventListener("click", async () => {
+//   console.log("Hello");
+//   const [fileHandle] = await window.showOpenFilePicker();
+//   const file = await fileHandle.getFile();
+// 
+//   // const a = FloatsMatrix.newFromCSV(file.stream());
+//   // const b = FloatsVector.newFromCSV(file.text());
+// });
+
