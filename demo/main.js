@@ -13,15 +13,16 @@ import init, {
   const response = await fetch('./mat.csv');
 
   // First try with this
-  const stream = response.body;
-  console.log(stream);
-  // const a = FloatsMatrix.newFromCSV(stream);
+  //const stream = response.body;
+  //console.log(stream);
+  const a = await FloatsMatrix.newFromCSV(response);
+  console.log(a.data);
   // console.log(a.data);
 
   // If this doesn't work then just pass the entire text to the function
-  // const text = await response.text();
-  // console.log(text);
-  // const a = FloatsMatrix.newFromCSV(text);
+   //const text = await response.text();
+   //console.log(text);
+   //const a = FloatsMatrix.newFromCSV(text);
   // console.log(a.data);
 })();
 
