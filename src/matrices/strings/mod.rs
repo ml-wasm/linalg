@@ -1,4 +1,5 @@
 mod iteration;
+mod new;
 mod utils;
 
 use ndarray::{s, Array, Array2};
