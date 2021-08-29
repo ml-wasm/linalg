@@ -1,6 +1,7 @@
 import init, {
   initThreadPool,
   FloatsMatrix,
+  FloatsVector
 } from '@ml.wasm/linalg';
 
 (async () => {
@@ -19,6 +20,9 @@ import init, {
   console.log(a.data);
   // console.log(a.data);
 
+  const vec_file = await fetch('./vec.csv');
+  let vec = await FloatsVector.newFromCSV(vec_file);
+  console.log(vec.data);
   // If this doesn't work then just pass the entire text to the function
    //const text = await response.text();
    //console.log(text);

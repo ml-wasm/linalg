@@ -1,9 +1,36 @@
 use super::StringsVector;
 use ndarray::Array1;
+use ndarray_csv::Array2Reader;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 impl StringsVector {
+ 
+    /// Create new Vector from csv
+    #[wasm_bindgen(js_name = newFromCSV)]
+    pub async fn new_from_csv(file : web_sys::File) -> StringsVector {
+        let jsdata = wasm_bindgen_futures::JsFuture::from(file.text())
+            .await
+            .unwrap_throw();
+
+        let data = jsdata.as_string().unwrap();
+
+        let mut reader = csv::ReaderBuilder::new()
+            .has_headers(false)
+            .from_reader(data.as_bytes());
+
+        let data_res = reader.deserialize_array2_dynamic();
+        
+        match data_res {
+            Ok(data) => {
+                return StringsVector::new(data.into_raw_vec());
+            },
+            Err(err) => {
+                panic!("{}", err);
+            }
+        }
+    }
+    
     /// Create a new Strings1d of the length calling the specified function
     /// without any arguments
     #[wasm_bindgen(js_name = "newWithSimpleFunc")]
