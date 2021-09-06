@@ -10,7 +10,7 @@ impl FloatsMatrix {
     #[wasm_bindgen(js_name = newWithElement)]
     pub fn new_with_elem(num_rows: usize, num_cols: usize, element: f64) -> FloatsMatrix {
         FloatsMatrix {
-            data: Array2::from_elem([num_rows, num_cols], element)
+            data: Array2::from_elem([num_rows, num_cols], element),
         }
     }
 
@@ -18,7 +18,7 @@ impl FloatsMatrix {
     #[wasm_bindgen(js_name = newWithZeroes)]
     pub fn new_with_zeros(num_rows: usize, num_cols: usize) -> FloatsMatrix {
         FloatsMatrix {
-            data: Array2::zeros([num_rows, num_cols])
+            data: Array2::zeros([num_rows, num_cols]),
         }
     }
 
@@ -26,40 +26,36 @@ impl FloatsMatrix {
     #[wasm_bindgen(js_name = newWithOnes)]
     pub fn new_with_ones(num_rows: usize, num_cols: usize) -> FloatsMatrix {
         FloatsMatrix {
-            data: Array2::ones([num_rows, num_cols])
+            data: Array2::ones([num_rows, num_cols]),
         }
     }
-    
+
     /// Create new identity matrix of size n
     #[wasm_bindgen(js_name = newEye)]
     pub fn new_eye(size: usize) -> FloatsMatrix {
         FloatsMatrix {
-            data: Array2::eye(size)
+            data: Array2::eye(size),
         }
     }
-    
-    /// Create new FloatsMatrix from csv file 
+
+    /// Create new FloatsMatrix from csv file
     #[wasm_bindgen(js_name = newFromCSV)]
-    pub async fn new_from_csv(file : web_sys::File) -> FloatsMatrix {
-        let jsdata = wasm_bindgen_futures::JsFuture::from(file.text())
-            .await
-            .unwrap_throw();
-
-        let data = jsdata.as_string().unwrap();
-
+    // pub async fn new_from_csv(file : web_sys::File) -> FloatsMatrix {
+    //     let jsdata = wasm_bindgen_futures::JsFuture::from(file.text())
+    //         .await
+    //         .unwrap_throw();
+    pub fn new_from_csv(data: String) -> FloatsMatrix {
         let mut reader = csv::ReaderBuilder::new()
             .has_headers(false)
             .from_reader(data.as_bytes());
 
         let data_res = reader.deserialize_array2_dynamic();
-        
+
         match data_res {
             Ok(data) => {
                 //data.reshape((num_rows, num_cols));
-                return FloatsMatrix {
-                    data
-                };
-            },
+                return FloatsMatrix { data };
+            }
             Err(err) => {
                 panic!("{}", err);
             }
