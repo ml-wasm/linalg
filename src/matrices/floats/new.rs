@@ -62,6 +62,17 @@ impl FloatsMatrix {
         }
     }
 
+    /// Create new matrix from typed array with given shape
+    #[wasm_bindgen(js_name = "newFromTypedArray")]
+    pub fn new_from_typed_array(typed_array: &js_sys::Float64Array, num_rows: usize, num_cols: usize) -> FloatsMatrix {
+        let mut raw_data = vec![0.0; typed_array.length() as usize];
+        typed_array.copy_to(raw_data.as_mut_slice());
+
+        FloatsMatrix {
+            data: Array2::from_shape_vec((num_rows, num_cols), raw_data).unwrap()
+        }
+    }
+    
     /// Create a new FloatsMatrix of specified length randomly in the range (0, 1]
     #[wasm_bindgen(js_name = "newWithRandom")]
     pub fn new_with_random(size: js_sys::Array) -> FloatsMatrix {

@@ -58,6 +58,17 @@ impl IntegersMatrix {
         }
     }
 
+    /// Create new matrix from typed array with given shape
+    #[wasm_bindgen(js_name = "newFromTypedArray")]
+    pub fn new_from_typed_array(typed_array: &js_sys::Int32Array, num_rows: usize, num_cols: usize)  -> IntegersMatrix {
+        let mut raw_data = vec![0; typed_array.length() as usize];
+        typed_array.copy_to(raw_data.as_mut_slice());
+
+        IntegersMatrix {
+            data: Array2::from_shape_vec((num_rows, num_cols), raw_data).unwrap()
+        }
+    }
+
     /// Create a new IntegersMatrix of specified length randomly in the range [INT_MIN, INT_MAX]
     #[wasm_bindgen(js_name = "newWithRandom")]
     pub fn new_with_random(size: js_sys::Array) -> IntegersMatrix {

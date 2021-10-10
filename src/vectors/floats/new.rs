@@ -56,6 +56,17 @@ impl FloatsVector {
         }
     }
 
+    /// Create new Float vector from typed array
+    #[wasm_bindgen(js_name = "newFromTypedArray")]
+    pub fn new_from_typed_array(typed_array: &js_sys::Float64Array) -> FloatsVector {
+        let mut raw_data = vec![0.0; typed_array.length() as usize];
+        typed_array.copy_to(raw_data.as_mut_slice());
+
+        FloatsVector {
+            data: Array1::from_vec(raw_data)
+        }
+    }
+
     /// Create a new FloatsVector of the length calling the specified function
     /// without any arguments
     #[wasm_bindgen(js_name = "newWithSimpleFunc")]
