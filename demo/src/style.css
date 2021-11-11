@@ -1,8 +1,68 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: #FFFDD0;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Merriweather', 'Times New Roman', Times, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+
+  display: grid;
+  grid-template-rows: auto 1fr auto 1fr;
+  gap: 0.5rem;
+
+  height: calc(100% - 1rem);
+  padding: 0.5rem;
+}
+
+#title {
+  text-align: center;
+}
+
+#code {
+  padding: 0.5rem 0.25rem;
+
+  text-align: center;
+  font-size: 3rem;
+  font-family: 'JetBrainsMono Nerd Font', monospace;
+  color: #2c3e50;
+  outline: none;
+  border: none;
+  background-color: #FFFCC0;
+  font-weight: bold;
+
+  border-top: 5px solid #2c3e50;
+  border-bottom: 5px solid #2c3e50;
+}
+
+#input {
+  display: flex;
+  justify-content: space-around;
+}
+
+#output {
+  display: flex;
+  justify-content: space-around;
+}
+
+.variable {
+  font-size: xx-large;
+  display: flex;
+  align-items: center;
+}
+
+.variable > * {
+  margin: 0.5rem;
+}
+
+.matrix {
+  display: grid;
+  justify-items: end;
+}
+
+.cell {
+  margin: 0.5rem;
 }
