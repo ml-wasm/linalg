@@ -34,7 +34,7 @@ macro_rules! one_dimensional_basic_methods {
                 self.data = self.data.slice(s![..;-1]).to_owned();
             }
 
-            /// Return the array reversed
+            /// Return the array
             pub fn reversed(&self) -> Self {
                 Self {
                     data: self.data.slice(s![..;-1]).to_owned(),

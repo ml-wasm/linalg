@@ -8,11 +8,10 @@ use serde::{Deserialize, Serialize};
 use std::ops::*;
 use wasm_bindgen::prelude::*;
 
+use crate::macros::apply;
 use crate::{
-    apply_functions, apply_functions_with_alias, apply_functions_with_arg,
-    apply_functions_with_arg_with_alias, apply_functions_with_two_args, matrices_sampling_methods,
-    two_dimensional_basic_methods, two_dimensional_interop_methods, two_dimensional_math_methods,
-    vectors::floats::FloatsVector,
+    matrices_sampling_methods, two_dimensional_basic_methods, two_dimensional_interop_methods,
+    two_dimensional_math_methods, vectors::floats::FloatsVector,
 };
 
 #[wasm_bindgen]
@@ -27,7 +26,7 @@ two_dimensional_basic_methods!(FloatsMatrix, FloatsVector, f64);
 two_dimensional_math_methods!(FloatsMatrix, FloatsVector, f64);
 matrices_sampling_methods!(FloatsMatrix);
 
-apply_functions!(FloatsMatrix {
+apply::zero!(FloatsMatrix {
     floor
     "Computes the largest integer less than equal to the number",
 
@@ -108,7 +107,15 @@ apply_functions!(FloatsMatrix {
     "Computes the inverse hyperbolic tangent of the element"
 });
 
-apply_functions_with_arg!(FloatsMatrix, f64 {
+apply::zero_aliased!(FloatsMatrix {
+    exp_m1 - exp_minus_1 = expMinus1
+    "Computes `e^x - 1`",
+
+    ln_1p - ln_plus_1 = lnPlus1
+    "Computes `ln(n + 1)`"
+});
+
+apply::one!(FloatsMatrix, f64 {
     div_euclid = divEuclid
     "Calculates the quotient of euclidean division on each element",
 
@@ -129,34 +136,26 @@ apply_functions_with_arg!(FloatsMatrix, f64 {
     "Computes the four quadrant arctangent of the element"
 });
 
-apply_functions_with_arg!(FloatsMatrix, i32 {
+apply::one!(FloatsMatrix, i32 {
     powi
     "Raises each element to an integer"
 });
 
-apply_functions_with_arg_with_alias!(FloatsMatrix, f64 {
-    add | add_constant = addConstant
+apply::one_aliased!(FloatsMatrix, f64 {
+    add - add_constant = addConstant
     "Add an float to each element",
 
-    sub | sub_constant = subConstant
+    sub - sub_constant = subConstant
     "Subtract an float from each element",
 
-    mul | mul_constant = mulConstant
+    mul - mul_constant = mulConstant
     "Multiply an float to each element",
 
-    div | div_constant = divConstant
+    div - div_constant = divConstant
     "Divide each element by an float"
 });
 
-apply_functions_with_alias!(FloatsMatrix {
-    exp_m1 | exp_minus_1 = expMinus1
-    "Computes `e^x - 1`",
-
-    ln_1p | ln_plus_1 = lnPlus1
-    "Computes `ln(n + 1)`"
-});
-
-apply_functions_with_two_args!(FloatsMatrix, f64, f64 {
+apply::two!(FloatsMatrix, f64, f64 {
     mul_add = mulAdd
     "Compute `x*a + b` for each element `x`"
 });

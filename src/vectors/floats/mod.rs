@@ -8,9 +8,8 @@ use ndarray::{arr1, s, Array1, Axis};
 use std::ops::*;
 use wasm_bindgen::prelude::*;
 
+use crate::macros::apply;
 use crate::{
-    apply_functions, apply_functions_with_alias, apply_functions_with_arg,
-    apply_functions_with_arg_with_alias, apply_functions_with_two_args,
     one_dimensional_basic_methods, one_dimensional_interop_methods, one_dimensional_math_methods,
     vectors_sampling_methods,
 };
@@ -27,7 +26,7 @@ one_dimensional_basic_methods!(FloatsVector, f64);
 one_dimensional_math_methods!(FloatsVector, f64);
 vectors_sampling_methods!(FloatsVector);
 
-apply_functions!(FloatsVector {
+apply::zero!(FloatsVector {
     floor
     "Computes the largest integer less than equal to the number",
 
@@ -108,7 +107,15 @@ apply_functions!(FloatsVector {
     "Computes the inverse hyperbolic tangent of the element"
 });
 
-apply_functions_with_arg!(FloatsVector, f64 {
+apply::zero_aliased!(FloatsVector {
+    exp_m1 - exp_minus_1 = expMinus1
+    "Computes `e^x - 1`",
+
+    ln_1p - ln_plus_1 = lnPlus1
+    "Computes `ln(n + 1)`"
+});
+
+apply::one!(FloatsVector, f64 {
     div_euclid = divEuclid
     "Calculates the quotient of euclidean division on each element",
 
@@ -129,34 +136,26 @@ apply_functions_with_arg!(FloatsVector, f64 {
     "Computes the four quadrant arctangent of the element"
 });
 
-apply_functions_with_arg_with_alias!(FloatsVector, f64 {
-    add | add_constant = addConstant
-    "Add an float to each element",
-
-    sub | sub_constant = subConstant
-    "Subtract an float from each element",
-
-    mul | mul_constant = mulConstant
-    "Multiply an float to each element",
-
-    div | div_constant = divConstant
-    "Divide each element by an float"
-});
-
-apply_functions_with_arg!(FloatsVector, i32 {
+apply::one!(FloatsVector, i32 {
     powi
     "Raises each element to an integer"
 });
 
-apply_functions_with_alias!(FloatsVector {
-    exp_m1 | exp_minus_1 = expMinus1
-    "Computes `e^x - 1`",
+apply::one_aliased!(FloatsVector, f64 {
+    add - add_constant = addConstant
+    "Add an float to each element",
 
-    ln_1p | ln_plus_1 = lnPlus1
-    "Computes `ln(n + 1)`"
+    sub - sub_constant = subConstant
+    "Subtract an float from each element",
+
+    mul - mul_constant = mulConstant
+    "Multiply an float to each element",
+
+    div - div_constant = divConstant
+    "Divide each element by an float"
 });
 
-apply_functions_with_two_args!(FloatsVector, f64, f64 {
+apply::two!(FloatsVector, f64, f64 {
     mul_add = mulAdd
     "Compute `x*a + b` for each element `x`"
 });
