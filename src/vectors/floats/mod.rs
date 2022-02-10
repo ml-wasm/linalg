@@ -5,7 +5,6 @@ pub mod stats;
 pub mod utils;
 
 use ndarray::{arr1, s, Array1, Axis};
-use std::ops::*;
 use wasm_bindgen::prelude::*;
 
 use crate::macros::apply;
@@ -25,6 +24,8 @@ one_dimensional_interop_methods!(FloatsVector, f64);
 one_dimensional_basic_methods!(FloatsVector, f64);
 one_dimensional_math_methods!(FloatsVector, f64);
 vectors_sampling_methods!(FloatsVector);
+
+use std::ops::*;
 
 apply::zero!(FloatsVector {
     floor
@@ -107,19 +108,19 @@ apply::zero!(FloatsVector {
     "Computes the inverse hyperbolic tangent of the element"
 });
 
-apply::zero_aliased!(FloatsVector {
-    exp_m1 - exp_minus_1 = expMinus1
-    "Computes `e^x - 1`",
+apply::zero!(FloatsVector {
+    exp_m1 = exp_minus_1
+    "Computes `e^x = 1`",
 
-    ln_1p - ln_plus_1 = lnPlus1
+    ln_1p = ln_plus_1
     "Computes `ln(n + 1)`"
 });
 
 apply::one!(FloatsVector, f64 {
-    div_euclid = divEuclid
+    div_euclid
     "Calculates the quotient of euclidean division on each element",
 
-    rem_euclid = remEuclid
+    rem_euclid
     "Calculates the remainder of euclideam division on each element",
 
     powf
@@ -141,21 +142,21 @@ apply::one!(FloatsVector, i32 {
     "Raises each element to an integer"
 });
 
-apply::one_aliased!(FloatsVector, f64 {
-    add - add_constant = addConstant
+apply::one!(FloatsVector, f64 {
+    add = add_constant
     "Add an float to each element",
 
-    sub - sub_constant = subConstant
+    sub = sub_constant
     "Subtract an float from each element",
 
-    mul - mul_constant = mulConstant
+    mul = mul_constant
     "Multiply an float to each element",
 
-    div - div_constant = divConstant
+    div = div_constant
     "Divide each element by an float"
 });
 
 apply::two!(FloatsVector, f64, f64 {
-    mul_add = mulAdd
+    mul_add
     "Compute `x*a + b` for each element `x`"
 });

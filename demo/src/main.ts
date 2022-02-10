@@ -39,12 +39,11 @@ function createVariable(identifier: string, data: Array<Array<number>>): HTMLDiv
   return variable;
 }
 
-
 let linalg: any = null;
 
 async function initialize(): Promise<void> {
   linalg = Comlink.wrap(new Worker(
-    new URL('./worker.js', import.meta.url),
+    new URL('./worker.ts', import.meta.url),
     { type: 'module' }
   ));
 
@@ -52,6 +51,8 @@ async function initialize(): Promise<void> {
   input.appendChild(createVariable('a', a));
   input.appendChild(createVariable('b', b));
   input.appendChild(createVariable('c', c));
+
+  linalg.test(false);
 }
 
 initialize();

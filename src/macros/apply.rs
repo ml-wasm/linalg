@@ -1,122 +1,170 @@
 macro_rules! zero {
 	($stuc:ty {
         $(
-            $func:ident $(= $jsname:ident)? $doc:literal
+            $func:ident  $doc:literal
         ),*
     }) => {
-		#[wasm_bindgen]
-        impl $stuc {
-            $(
-                $(#[wasm_bindgen(js_name = $jsname)])?
-                #[doc=$doc]
-                pub fn $func(&mut self) {
-                    self.data.par_map_inplace(|x| *x = x.$func())
-                }
-            )*
+        paste::paste! {
+            #[wasm_bindgen]
+            impl $stuc {
+                $(
+                    #[wasm_bindgen(js_name = $func:camel)]
+                    #[doc=$doc]
+                    pub fn $func(mut self) -> Self {
+                        self.data.map_inplace(|x| *x = x.$func());
+                        self
+                    }
+
+                    #[wasm_bindgen(js_name = $func:camel _)]
+                    #[doc=$doc]
+                    pub fn [<$func _par>](mut self) -> Self {
+                        self.data.par_map_inplace(|x| *x = x.$func());
+                        self
+                    }
+                )*
+            }
         }
 	};
-}
-
-macro_rules! zero_aliased {
 	($stuc:ty {
         $(
-            $func:ident - $rustname:ident $(= $jsname:ident)? $doc:literal
+            $func:ident = $alias:ident $doc:literal
         ),*
     }) => {
-		#[wasm_bindgen]
-        impl $stuc {
-            $(
-                $(#[wasm_bindgen(js_name = $jsname)])?
-                #[doc=$doc]
-                pub fn $rustname(&mut self) {
-                    self.data.par_map_inplace(|x| *x = x.$func())
-                }
-            )*
+        paste::paste! {
+            #[wasm_bindgen]
+            impl $stuc {
+                $(
+                    #[wasm_bindgen(js_name = $alias:camel)]
+                    #[doc=$doc]
+                    pub fn $alias(mut self) -> Self {
+                        self.data.map_inplace(|x| *x = x.$func());
+                        self
+                    }
+
+                    #[wasm_bindgen(js_name = $alias:camel _)]
+                    #[doc=$doc]
+                    pub fn [<$alias _par>](mut self) -> Self {
+                        self.data.par_map_inplace(|x| *x = x.$func());
+                        self
+                    }
+                )*
+            }
         }
 	};
 }
 
 pub(crate) use zero;
-pub(crate) use zero_aliased;
 
 macro_rules! one {
 	($stuc:ty, $arg:ty {
         $(
-            $func:ident $(= $jsname:ident)? $doc:literal
+            $func:ident $doc:literal
         ),*
     }) => {
-		#[wasm_bindgen]
-        impl $stuc {
-            $(
-                $(#[wasm_bindgen(js_name = $jsname)])?
-                #[doc=$doc]
-                pub fn $func(&mut self, a: $arg) {
-                    self.data.par_map_inplace(|x| *x = x.$func(a))
-                }
-            )*
+        paste::paste! {
+            #[wasm_bindgen]
+            impl $stuc {
+                $(
+                    #[wasm_bindgen(js_name = $func:camel)]
+                    #[doc=$doc]
+                    pub fn $func(mut self, a: $arg) -> Self {
+                        self.data.map_inplace(|x| *x = x.$func(a));
+                        self
+                    }
+
+                    #[wasm_bindgen(js_name = $func:camel _)]
+                    #[doc=$doc]
+                    pub fn [<$func _par>](mut self, a: $arg) -> Self {
+                        self.data.par_map_inplace(|x| *x = x.$func(a));
+                        self
+                    }
+                )*
+            }
         }
 	};
-}
-
-macro_rules! one_aliased {
 	($stuc:ty, $arg:ty {
         $(
-            $func:ident - $rustname:ident $(= $jsname:ident)? $doc:literal
+            $func:ident = $alias:ident $doc:literal
         ),*
     }) => {
-		#[wasm_bindgen]
-        impl $stuc {
-            $(
-                $(#[wasm_bindgen(js_name = $jsname)])?
-                #[doc=$doc]
-                pub fn $rustname(&mut self, a: $arg) {
-                    self.data.par_map_inplace(|x| *x = x.$func(a))
-                }
-            )*
+        paste::paste! {
+            #[wasm_bindgen]
+            impl $stuc {
+                $(
+                    #[wasm_bindgen(js_name = $alias:camel)]
+                    #[doc=$doc]
+                    pub fn $alias(mut self, a: $arg) -> Self {
+                        self.data.map_inplace(|x| *x = x.$func(a));
+                        self
+                    }
+
+                    #[wasm_bindgen(js_name = $alias:camel _)]
+                    #[doc=$doc]
+                    pub fn [<$alias _par>](mut self, a: $arg) -> Self {
+                        self.data.par_map_inplace(|x| *x = x.$func(a));
+                        self
+                    }
+                )*
+            }
         }
 	};
 }
 
 pub(crate) use one;
-pub(crate) use one_aliased;
 
 macro_rules! two {
 	($stuc:ty, $arg1:ty, $arg2:ty {
         $(
-            $func:ident $(= $jsname:ident)? $doc:literal
+            $func:ident $doc:literal
         ),*
     }) => {
-		#[wasm_bindgen]
-        impl $stuc {
-            $(
-                $(#[wasm_bindgen(js_name = $jsname)])?
-                #[doc=$doc]
-                pub fn $func(&mut self, a: $arg1, b: $arg2) {
-                    self.data.par_map_inplace(|x| *x = x.$func(a, b))
-                }
-            )*
+        paste::paste! {
+            #[wasm_bindgen]
+            impl $stuc {
+                $(
+                    #[wasm_bindgen(js_name = $func:camel)]
+                    #[doc=$doc]
+                    pub fn $func(mut self, a: $arg1, b: $arg2) -> Self {
+                        self.data.map_inplace(|x| *x = x.$func(a, b));
+                        self
+                    }
+
+                    #[wasm_bindgen(js_name = $func:camel _)]
+                    #[doc=$doc]
+                    pub fn [<$func _par>](mut self, a: $arg1, b: $arg2) -> Self {
+                        self.data.par_map_inplace(|x| *x = x.$func(a, b));
+                        self
+                    }
+                )*
+            }
         }
 	};
-}
-
-macro_rules! two_aliased {
 	($stuc:ty, $arg1:ty, $arg2:ty {
         $(
-            $func:ident - $rustname:ident $(= $jsname:ident)? $doc:literal
+            $func:ident = $alias:ident $doc:literal
         ),*
     }) => {
-		#[wasm_bindgen]
-        impl $stuc {
-            $(
-                $(#[wasm_bindgen(js_name = $jsname)])?
-                #[doc=$doc]
-                pub fn $rustname(&mut self, a: $arg1, b: $arg2:ty) {
-                    self.data.par_map_inplace(|x| *x = x.$func(a, b))
-                }
-            )*
+        paste::paste! {
+            #[wasm_bindgen]
+            impl $stuc {
+                $(
+                    #[wasm_bindgen(js_name = $alias:camel)]
+                    #[doc=$doc]
+                    pub fn $alias(mut self, a: $arg1, b: $arg2) -> Self {
+                        self.data.map_inplace(|x| *x = x.$func(a, b));
+                        self
+                    }
+
+                    #[wasm_bindgen(js_name = $alias:camel _)]
+                    #[doc=$doc]
+                    pub fn [<$alias _par>](mut self, a: $arg1, b: $arg2) -> Self {
+                        self.data.par_map_inplace(|x| *x = x.$func(a, b));
+                        self
+                    }
+                )*
+            }
         }
 	};
 }
 
 pub(crate) use two;
-pub(crate) use two_aliased;
