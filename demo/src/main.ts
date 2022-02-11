@@ -1,5 +1,8 @@
 import * as Comlink from 'comlink';
 import './style.css'
+import { Array1d, Array2d } from './utils/types';
+
+import { Linalg } from './worker';
 
 const input = document.getElementById("input") as HTMLDivElement;
 const code = document.getElementById("code") as HTMLInputElement;
@@ -21,7 +24,7 @@ function createMatrix(data: Array<Array<number>>): HTMLDivElement {
   return matrix;
 }
 
-function createVariable(identifier: string, data: Array<Array<number>>): HTMLDivElement {
+function createVariable(identifier: string, data: Array2d): HTMLDivElement {
   const variable = document.createElement("div");
   variable.classList.add("variable");
 
@@ -39,31 +42,44 @@ function createVariable(identifier: string, data: Array<Array<number>>): HTMLDiv
   return variable;
 }
 
-let linalg: any = null;
+function populateDiv(div: HTMLDivElement, matrices: Array<[string, Array2d]>) {
+  console.log(matrices);
+
+  for (let [identifier, data] of matrices) {
+    div.appendChild(createVariable(identifier, data));
+  }
+}
+
+const aSize = [2, 3];
+const bSize = [2, 3];
+const cSize = [3, 2];
+// let a: Array2d | null = null, b: Array2d | null = null, c: Array2d | null = null;
 
 async function initialize(): Promise<void> {
-  linalg = Comlink.wrap(new Worker(
+  const linalg: Comlink.Remote<Linalg> = Comlink.wrap(new Worker(
     new URL('./worker.ts', import.meta.url),
     { type: 'module' }
   ));
 
-  const [a, b, c] = await linalg.initialize();
-  input.appendChild(createVariable('a', a));
-  input.appendChild(createVariable('b', b));
-  input.appendChild(createVariable('c', c));
+  await linalg.initialize();
+  const [a, b, c] = await linalg.createDemo(aSize, bSize, cSize);
+  populateDiv(input, [['a', a], ['b', b], ['c', c]])
 
-  linalg.test(false);
+  code.onkeydown = async key => {
+    if (key.code === 'Enter') {
+      const { result, changed } = await linalg.calculate(code.value, a, b, c);
+
+      while (output.firstChild) { output.removeChild(output.firstChild) }
+
+      if (result) {
+        populateDiv(output, [['result', result]]);
+      } else {
+        populateDiv(output, [['a', changed[0]], ['b', changed[1]], ['c', changed[2]]]);
+      }
+    }
+  };
 }
 
 initialize();
-
-code.onkeydown = async key => {
-  if (key.code === 'Enter') {
-    const result = await linalg.calculate(code.value);
-    console.log(result);
-    output.childNodes.forEach(c => c.remove());
-    output.appendChild(createVariable('result', result));
-  }
-};
 
 

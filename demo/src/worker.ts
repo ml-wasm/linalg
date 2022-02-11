@@ -1,61 +1,59 @@
+import { FloatsMatrix } from '@ml.wasm/linalg';
 import * as Comlink from 'comlink';
-import { timeit } from './utils';
+import { Lib, Array1d, Array2d } from './utils/types'
+// import { timeit } from './utils/timeit';
 
-interface Linalg {
-  wasm: null | typeof import("/home/puipuituipui/Projects/ml.wasm/linalg/pkg/linalg");
-  initialize: () => Promise<any>,
-  calculate: (functionBody: String) => any,
-  test: () => any,
+
+export interface Linalg {
+  wasm: null | Lib,
+  initialize: () => Promise<void>,
+  createDemo: (aSize: Array1d, bSize: Array1d, cSize: Array1d) => Promise<Array<Array2d>>,
+  calculate: (functionBody: String, a: Array2d, b: Array2d, c: Array2d) => any,
 }
-
 
 const linalg: Linalg = {
   wasm: null,
   async initialize() {
-    console.log('inits started');
     const wasm = await import('@ml.wasm/linalg');
+    const threads = navigator.hardwareConcurrency;
 
     await wasm.default();
-    await wasm.initThreadPool(navigator.hardwareConcurrency);
+    await wasm.initThreadPool(threads);
 
-    console.log(`inits completed (threads: ${navigator.hardwareConcurrency})`);
+    console.log(`Inits completed (threads: ${threads})`);
 
     this.wasm = wasm;
+  },
+  async createDemo(aSize, bSize, cSize) {
+    const random = this.wasm?.FloatsMatrix?.newWithRandomUniform;
+    if (random === undefined) return new Array<Array2d>();
 
-    const a = new this.wasm.FloatsMatrix([[1, 2, 3], [4, 5, 6]]);
-    const b = new this.wasm.FloatsMatrix([[-1, -2, -3], [-4, -5, -6]]);
-    const c = new this.wasm.FloatsMatrix([[1, 2], [3, 4], [5, 6]]);
+    const a = random(aSize, -10, 10);
+    const b = random(bSize, -10, 10);
+    const c = random(cSize, -10, 10);
 
     return [a.data, b.data, c.data];
   },
-  async calculate(functionBody: String) {
-    const a = new this.wasm.FloatsMatrix([[1, 2, 3], [4, 5, 6]]);
-    const b = new this.wasm.FloatsMatrix([[-1, -2, -3], [-4, -5, -6]]);
-    const c = new this.wasm.FloatsMatrix([[1, 2], [3, 4], [5, 6]]);
+  async calculate(functionBody, aData, bData, cData) {
+    const FloatsMatrix = this.wasm?.FloatsMatrix;
+    if (FloatsMatrix == undefined) return null;
 
-    let result = new Function('a', 'b', 'c', `return ${functionBody}`)(a, b, c);
-    if (typeof result === 'number') result = [[result]];
+    const a = new FloatsMatrix(aData);
+    const b = new FloatsMatrix(bData);
+    const c = new FloatsMatrix(cData);
+
+    let [result, changed] = new Function(
+      'a', 'b', 'c', `return [${functionBody}, [a, b, c]]`)(a, b, c);
+
+    if (!result) return { changed: changed.map((x: FloatsMatrix) => x.data) };
+
+    if (typeof result === 'number') return { result: [[result]] };
     else result = result.data;
 
     if (!result[0]?.hasOwnProperty('length')) result = [result];
 
-    return result;
+    return { result };
   },
-  async test() {
-    const { FloatsVector } = linalg.wasm;
-    const a = FloatsVector.newWithRandom(5e6);
-    const b = a.clone();
-
-    const [normal] = timeit(() =>
-      a.MulAdd(9.87654321, 1.23456789)
-    );
-    const [parallel] = timeit(() =>
-      b.MulAdd_(9.87654321, 1.23456789)
-    );
-
-    console.log(`normal ${normal}`);
-    console.log(`parallel ${parallel}`);
-  }
 }
 
 

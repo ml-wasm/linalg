@@ -5,4 +5,3 @@ export function timeit<R>(cb: () => R): [number, R] {
 
   return [end - start, result];
 }
-
