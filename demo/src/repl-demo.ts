@@ -1,8 +1,7 @@
 import * as Comlink from 'comlink';
 import './style.css'
-import { Array1d, Array2d } from './utils/types';
-
-import { Linalg } from './worker';
+import { Array2d } from './utils/types';
+import { ReplDemo } from './workers/repl-demo-worker';
 
 const input = document.getElementById("input") as HTMLDivElement;
 const code = document.getElementById("code") as HTMLInputElement;
@@ -42,44 +41,41 @@ function createVariable(identifier: string, data: Array2d): HTMLDivElement {
   return variable;
 }
 
-function populateDiv(div: HTMLDivElement, matrices: Array<[string, Array2d]>) {
-  console.log(matrices);
-
-  for (let [identifier, data] of matrices) {
+function populateDiv(div: HTMLDivElement, arraysData: Record<string, Array2d>) {
+  for (let [identifier, data] of Object.entries(arraysData)) {
     div.appendChild(createVariable(identifier, data));
   }
 }
 
-const aSize = [2, 3];
-const bSize = [2, 3];
-const cSize = [3, 2];
-// let a: Array2d | null = null, b: Array2d | null = null, c: Array2d | null = null;
-
-async function initialize(): Promise<void> {
-  const linalg: Comlink.Remote<Linalg> = Comlink.wrap(new Worker(
-    new URL('./worker.ts', import.meta.url),
-    { type: 'module' }
-  ));
-
-  await linalg.initialize();
-  const [a, b, c] = await linalg.createDemo(aSize, bSize, cSize);
-  populateDiv(input, [['a', a], ['b', b], ['c', c]])
-
-  code.onkeydown = async key => {
-    if (key.code === 'Enter') {
-      const { result, changed } = await linalg.calculate(code.value, a, b, c);
-
-      while (output.firstChild) { output.removeChild(output.firstChild) }
-
-      if (result) {
-        populateDiv(output, [['result', result]]);
-      } else {
-        populateDiv(output, [['a', changed[0]], ['b', changed[1]], ['c', changed[2]]]);
-      }
-    }
-  };
+function clearDiv(div: HTMLDivElement) {
+  while (div.firstChild) { div.removeChild(div.firstChild) }
 }
 
-initialize();
+const arraySizes = {
+  'a': [2, 3],
+  'b': [2, 3],
+  'c': [3, 2],
+}
+
+const WrappedRepl = Comlink.wrap<typeof ReplDemo>(new Worker(
+  new URL('./workers/repl-demo-worker.ts', import.meta.url),
+  { type: 'module' }
+));
+
+const demo = await new WrappedRepl();
+await demo.init();
+
+await demo.createArrays(arraySizes);
+const arraysData = await demo.getArraysData();
+populateDiv(input, arraysData);
+
+code.onkeydown = async key => {
+  if (key.code === 'Enter') {
+    const toShow = await demo.performOperation(code.value);
+
+    clearDiv(output);
+    populateDiv(output, toShow);
+  }
+};
 
 
