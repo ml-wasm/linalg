@@ -13,4 +13,10 @@ impl IntegersVector {
             data: Array2::from_shape_vec((num_rows, num_cols), self.data.to_vec()).unwrap()
         }
     }
+
+    #[wasm_bindgen(js_name = toTypedArray)]
+    pub fn to_typed_array(&self) -> js_sys::Int32Array{
+        let vec = self.data.to_vec();
+        js_sys::Int32Array::from(vec.as_slice())
+    }
 }

@@ -1,3 +1,4 @@
+import { FloatsMatrix } from '@ml.wasm/linalg';
 import * as Comlink from 'comlink';
 import { Linalg } from '../utils/types';
 
@@ -15,7 +16,17 @@ export class KnightDemo {
     this.wasm = wasm;
   }
   test() {
-    console.log((new this.wasm.FloatsVector([1, 2, 3])).toString());
+    let a: FloatsMatrix = FloatsMatrix.newWithZeroes(3, 3 * 4);
+    for (let i = 0; i < 3; ++i) {
+      for (let j = 0; j < 3 * 4; j += 4) {
+        a.set([i, j], 0);
+        a.set([i, j + 1], 1);
+        a.set([i, j + 2], 2);
+        a.set([i, j + 3], 3);
+      }
+    }
+    let b = a.toVector().toTypedArray();
+    console.log(b.toString());
   }
 }
 
