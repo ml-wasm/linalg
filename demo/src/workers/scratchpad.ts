@@ -22,13 +22,13 @@ export class ScratchPad {
     const func = a.clone();
     const pfunc = a.clone();
 
-    const op = (x: number) => Math.expm1(x);
+    const op = (x: number) => x * 1234567890 + 9876543210;
 
     const [arrTime] = timeit(() => arr.map(op));
     const [typedTime] = timeit(() => typed.map(op));
     const [mapTime, mapReturn] = timeit(() => map.map(op));
-    const [funcTime, funcReturn] = timeit(() => func.expMinus1());
-    const [pfuncTime, pfuncReturn] = timeit(() => pfunc.expMinus1_());
+    const [funcTime, funcReturn] = timeit(() => func.mulAdd(1234567890, 9876543210));
+    const [pfuncTime, pfuncReturn] = timeit(() => pfunc.mulAdd_(1234567890, 9876543210));
 
     mapReturn.free();
     funcReturn.free();
