@@ -10,15 +10,27 @@ macro_rules! zero {
                 $(
                     #[wasm_bindgen(js_name = $func:camel:uncapitalize)]
                     #[doc=$doc]
-                    pub fn $func(mut self) -> Self {
-                        self.data.map_inplace(|x| *x = x.$func());
-                        self
+                    pub fn $func(&mut self) {
+                        self.data.mapv_inplace(|x| x.$func());
                     }
 
                     #[wasm_bindgen(js_name = $func:camel:uncapitalize _)]
                     #[doc=$doc]
-                    pub fn [<$func _par>](mut self) -> Self {
-                        self.data.par_map_inplace(|x| *x = x.$func());
+                    pub fn [<$func _consume>](mut self) -> Self {
+                        self.data.mapv_inplace(|x| x.$func());
+                        self
+                    }
+
+                    #[wasm_bindgen(js_name = $func:camel:uncapitalize Par)]
+                    #[doc=$doc]
+                    pub fn [<$func _par>](&mut self) {
+                        self.data.par_mapv_inplace(|x| x.$func());
+                    }
+
+                    #[wasm_bindgen(js_name = $func:camel:uncapitalize Par _)]
+                    #[doc=$doc]
+                    pub fn [<$func _par _consume>](mut self) -> Self {
+                        self.data.par_mapv_inplace(|x| x.$func());
                         self
                     }
                 )*
@@ -36,15 +48,27 @@ macro_rules! zero {
                 $(
                     #[wasm_bindgen(js_name = $alias:camel:uncapitalize)]
                     #[doc=$doc]
-                    pub fn $alias(mut self) -> Self {
-                        self.data.map_inplace(|x| *x = x.$func());
-                        self
+                    pub fn $alias(&mut self) {
+                        self.data.mapv_inplace(|x| x.$func())
                     }
 
                     #[wasm_bindgen(js_name = $alias:camel:uncapitalize _)]
                     #[doc=$doc]
-                    pub fn [<$alias _par>](mut self) -> Self {
-                        self.data.par_map_inplace(|x| *x = x.$func());
+                    pub fn [<$alias _consume>](mut self) -> Self {
+                        self.data.mapv_inplace(|x| x.$func());
+                        self
+                    }
+
+                    #[wasm_bindgen(js_name = $alias:camel:uncapitalize Par)]
+                    #[doc=$doc]
+                    pub fn [<$alias _par>](&mut self) {
+                        self.data.par_mapv_inplace(|x| x.$func())
+                    }
+
+                    #[wasm_bindgen(js_name = $alias:camel:uncapitalize Par _)]
+                    #[doc=$doc]
+                    pub fn [<$alias _par _consume>](mut self) -> Self {
+                        self.data.par_mapv_inplace(|x| x.$func());
                         self
                     }
                 )*
@@ -67,15 +91,27 @@ macro_rules! one {
                 $(
                     #[wasm_bindgen(js_name = $func:camel:uncapitalize)]
                     #[doc=$doc]
-                    pub fn $func(mut self, a: $arg) -> Self {
-                        self.data.map_inplace(|x| *x = x.$func(a));
-                        self
+                    pub fn $func(&mut self, a: $arg) {
+                        self.data.mapv_inplace(|x| x.$func(a));
                     }
 
                     #[wasm_bindgen(js_name = $func:camel:uncapitalize _)]
                     #[doc=$doc]
-                    pub fn [<$func _par>](mut self, a: $arg) -> Self {
-                        self.data.par_map_inplace(|x| *x = x.$func(a));
+                    pub fn [<$func _consume>](mut self, a: $arg) -> Self {
+                        self.data.mapv_inplace(|x| x.$func(a));
+                        self
+                    }
+
+                    #[wasm_bindgen(js_name = $func:camel:uncapitalize Par)]
+                    #[doc=$doc]
+                    pub fn [<$func _par>](&mut self, a: $arg) {
+                        self.data.par_mapv_inplace(|x| x.$func(a));
+                    }
+
+                    #[wasm_bindgen(js_name = $func:camel:uncapitalize Par _)]
+                    #[doc=$doc]
+                    pub fn [<$func _par _consume>](mut self, a: $arg) -> Self {
+                        self.data.par_mapv_inplace(|x| x.$func(a));
                         self
                     }
                 )*
@@ -93,15 +129,27 @@ macro_rules! one {
                 $(
                     #[wasm_bindgen(js_name = $alias:camel:uncapitalize)]
                     #[doc=$doc]
-                    pub fn $alias(mut self, a: $arg) -> Self {
-                        self.data.map_inplace(|x| *x = x.$func(a));
-                        self
+                    pub fn $alias(&mut self, a: $arg) {
+                        self.data.mapv_inplace(|x| x.$func(a));
                     }
 
                     #[wasm_bindgen(js_name = $alias:camel:uncapitalize _)]
                     #[doc=$doc]
-                    pub fn [<$alias _par>](mut self, a: $arg) -> Self {
-                        self.data.par_map_inplace(|x| *x = x.$func(a));
+                    pub fn [<$alias _consume>](mut self, a: $arg) -> Self {
+                        self.data.mapv_inplace(|x| x.$func(a));
+                        self
+                    }
+
+                    #[wasm_bindgen(js_name = $alias:camel:uncapitalize Par)]
+                    #[doc=$doc]
+                    pub fn [<$alias _par>](&mut self, a: $arg) {
+                        self.data.par_mapv_inplace(|x| x.$func(a));
+                    }
+
+                    #[wasm_bindgen(js_name = $alias:camel:uncapitalize Par _)]
+                    #[doc=$doc]
+                    pub fn [<$alias _par _consume>](mut self, a: $arg) -> Self {
+                        self.data.par_mapv_inplace(|x| x.$func(a));
                         self
                     }
                 )*
@@ -124,15 +172,27 @@ macro_rules! two {
                 $(
                     #[wasm_bindgen(js_name = $func:camel:uncapitalize)]
                     #[doc=$doc]
-                    pub fn $func(mut self, a: $arg1, b: $arg2) -> Self {
-                        self.data.map_inplace(|x| *x = x.$func(a, b));
-                        self
+                    pub fn $func(&mut self, a: $arg1, b: $arg2) {
+                        self.data.mapv_inplace(|x| x.$func(a, b));
                     }
 
                     #[wasm_bindgen(js_name = $func:camel:uncapitalize _)]
                     #[doc=$doc]
-                    pub fn [<$func _par>](mut self, a: $arg1, b: $arg2) -> Self {
-                        self.data.par_map_inplace(|x| *x = x.$func(a, b));
+                    pub fn [<$func _consume>](mut self, a: $arg1, b: $arg2) -> Self {
+                        self.data.mapv_inplace(|x| x.$func(a, b));
+                        self
+                    }
+
+                    #[wasm_bindgen(js_name = $func:camel:uncapitalize Par)]
+                    #[doc=$doc]
+                    pub fn [<$func _par>](&mut self, a: $arg1, b: $arg2) {
+                        self.data.par_mapv_inplace(|x| x.$func(a, b));
+                    }
+
+                    #[wasm_bindgen(js_name = $func:camel:uncapitalize Par _)]
+                    #[doc=$doc]
+                    pub fn [<$func _par _consume>](mut self, a: $arg1, b: $arg2) -> Self {
+                        self.data.par_mapv_inplace(|x| x.$func(a, b));
                         self
                     }
                 )*
@@ -150,15 +210,27 @@ macro_rules! two {
                 $(
                     #[wasm_bindgen(js_name = $alias:camel:uncapitalize)]
                     #[doc=$doc]
-                    pub fn $alias(mut self, a: $arg1, b: $arg2) -> Self {
-                        self.data.map_inplace(|x| *x = x.$func(a, b));
-                        self
+                    pub fn $alias(&mut self, a: $arg1, b: $arg2) {
+                        self.data.mapv_inplace(|x| x.$func(a, b));
                     }
 
                     #[wasm_bindgen(js_name = $alias:camel:uncapitalize _)]
                     #[doc=$doc]
-                    pub fn [<$alias _par>](mut self, a: $arg1, b: $arg2) -> Self {
-                        self.data.par_map_inplace(|x| *x = x.$func(a, b));
+                    pub fn [<$alias _consume>](mut self, a: $arg1, b: $arg2) -> Self {
+                        self.data.mapv_inplace(|x| x.$func(a, b));
+                        self
+                    }
+
+                    #[wasm_bindgen(js_name = $alias:camel:uncapitalize Par)]
+                    #[doc=$doc]
+                    pub fn [<$alias _par>](&mut self, a: $arg1, b: $arg2) {
+                        self.data.par_mapv_inplace(|x| x.$func(a, b));
+                    }
+
+                    #[wasm_bindgen(js_name = $alias:camel:uncapitalize Par _)]
+                    #[doc=$doc]
+                    pub fn [<$alias _par _consume>](mut self, a: $arg1, b: $arg2) -> Self {
+                        self.data.par_mapv_inplace(|x| x.$func(a, b));
                         self
                     }
                 )*
