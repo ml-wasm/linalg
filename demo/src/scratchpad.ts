@@ -9,4 +9,5 @@ const WrappedScratchPad = Comlink.wrap<typeof ScratchPad>(new Worker(
 
 const demo = await new WrappedScratchPad();
 await demo.init();
+await demo.parallelComparison();
 await demo.test();

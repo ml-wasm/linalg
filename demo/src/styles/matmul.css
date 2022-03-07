@@ -1,0 +1,24 @@
+html, body {
+  margin: 0;
+  height: 100vh;
+  background-color: #FFFDD0;
+
+  font-family: 'Merriweather', 'Times New Roman', Times, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
+
+#app {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+td {
+  text-align: center;
+}
