@@ -1,5 +1,4 @@
-#[macro_export]
-macro_rules! matrices_sampling_methods {
+macro_rules! sampling {
     ($stuc:ty) => {
         #[wasm_bindgen]
         impl $stuc {
@@ -43,3 +42,5 @@ macro_rules! matrices_sampling_methods {
         }
     };
 }
+
+pub(crate) use sampling;

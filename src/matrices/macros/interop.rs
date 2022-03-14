@@ -1,5 +1,4 @@
-#[macro_export]
-macro_rules! two_dimensional_interop_methods {
+macro_rules! interop {
     ($stuc:ident, $stucsm:ident, $typ:ty) => {
         impl $stuc {
             /// Create a new Floats1d
@@ -56,3 +55,5 @@ macro_rules! two_dimensional_interop_methods {
         }
     };
 }
+
+pub(crate) use interop;

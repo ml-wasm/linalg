@@ -1,5 +1,4 @@
-#[macro_export]
-macro_rules! two_dimensional_basic_methods {
+macro_rules! basic {
     ($stuc:ident, $stucsm:ident, $typ:ty) => {
         #[wasm_bindgen]
         impl $stuc {
@@ -427,3 +426,5 @@ macro_rules! two_dimensional_basic_methods {
         }
     };
 }
+
+pub(crate) use basic;

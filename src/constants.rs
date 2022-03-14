@@ -1,7 +1,7 @@
 use wasm_bindgen::prelude::*;
 
 macro_rules! constants {
-	($($name:ident: $type:ty = $value:expr);*) => {
+	($($name:ident: $type:ty = $value:expr);*$(;)?) => {
 		$(
 			#[wasm_bindgen]
 			#[allow(non_snake_case)]
@@ -14,7 +14,12 @@ macro_rules! constants {
 
 constants!(
     INT_MIN: i32 = i32::MIN;
-    INT_MAX: i32 = i32::MAX
+    INT_MAX: i32 = i32::MAX;
+);
+
+constants!(
+    BYTE_MIN: u8 = u8::MIN;
+    BYTE_MAX: u8 = u8::MAX;
 );
 
 constants!(
@@ -27,5 +32,5 @@ constants!(
     FLOAT_MIN_POSITIVE: f64 = f64::MIN_POSITIVE;
     FLOAT_E: f64 = std::f64::consts::E;
     FLOAT_PI: f64 = std::f64::consts::PI;
-    FLOAT_TAU: f64 = std::f64::consts::TAU
+    FLOAT_TAU: f64 = std::f64::consts::TAU;
 );

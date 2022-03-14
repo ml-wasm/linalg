@@ -7,11 +7,9 @@ use ndarray::{s, Array, Array2, Axis};
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
+use super::macros::{basic::basic, interop::interop, math::math, sampling::sampling};
 use crate::macros::apply;
-use crate::{
-    matrices_sampling_methods, two_dimensional_basic_methods, two_dimensional_interop_methods,
-    two_dimensional_math_methods, vectors::floats::FloatsVector,
-};
+use crate::vectors::floats::FloatsVector;
 
 #[wasm_bindgen]
 #[derive(Serialize, Deserialize, Clone)]
@@ -20,10 +18,10 @@ pub struct FloatsMatrix {
     pub data: Array2<f64>,
 }
 
-two_dimensional_interop_methods!(FloatsMatrix, FloatsVector, f64);
-two_dimensional_basic_methods!(FloatsMatrix, FloatsVector, f64);
-two_dimensional_math_methods!(FloatsMatrix, FloatsVector, f64);
-matrices_sampling_methods!(FloatsMatrix);
+interop!(FloatsMatrix, FloatsVector, f64);
+basic!(FloatsMatrix, FloatsVector, f64);
+math!(FloatsMatrix, FloatsVector, f64);
+sampling!(FloatsMatrix);
 
 use std::ops::*;
 

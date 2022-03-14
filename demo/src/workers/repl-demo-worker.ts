@@ -55,6 +55,7 @@ export class ReplDemo {
         arrays['result'] = result.data;
         break;
     }
+
     return arrays;
   }
 }

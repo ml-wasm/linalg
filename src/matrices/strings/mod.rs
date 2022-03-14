@@ -6,9 +6,8 @@ use ndarray::{s, Array, Array2};
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
-use crate::{
-    two_dimensional_basic_methods, two_dimensional_interop_methods, vectors::strings::StringsVector,
-};
+use super::macros::{basic::basic, interop::interop};
+use crate::vectors::strings::StringsVector;
 
 #[wasm_bindgen]
 #[derive(Serialize, Deserialize, Clone)]
@@ -17,5 +16,5 @@ pub struct StringsMatrix {
     pub data: Array2<String>,
 }
 
-two_dimensional_interop_methods!(StringsMatrix, StringsVector, String);
-two_dimensional_basic_methods!(StringsMatrix, StringsVector, String);
+interop!(StringsMatrix, StringsVector, String);
+basic!(StringsMatrix, StringsVector, String);

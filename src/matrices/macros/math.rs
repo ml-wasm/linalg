@@ -1,5 +1,4 @@
-#[macro_export]
-macro_rules! two_dimensional_math_methods {
+macro_rules! math {
     ($stuc:ident, $stucsm:ident, $typ:ty) => {
         #[wasm_bindgen]
         impl $stuc {
@@ -109,3 +108,5 @@ macro_rules! two_dimensional_math_methods {
         }
     };
 }
+
+pub(crate) use math;

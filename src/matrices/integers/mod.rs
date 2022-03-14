@@ -7,11 +7,9 @@ use ndarray::{s, Array, Array2, Axis};
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
+use super::macros::{basic::basic, interop::interop, math::math, sampling::sampling};
 use crate::macros::apply;
-use crate::{
-    matrices_sampling_methods, two_dimensional_basic_methods, two_dimensional_interop_methods,
-    two_dimensional_math_methods, vectors::integers::IntegersVector,
-};
+use crate::vectors::integers::IntegersVector;
 
 #[wasm_bindgen]
 #[derive(Serialize, Deserialize, Clone)]
@@ -20,10 +18,10 @@ pub struct IntegersMatrix {
     pub data: Array2<i32>,
 }
 
-two_dimensional_interop_methods!(IntegersMatrix, IntegersVector, i32);
-two_dimensional_basic_methods!(IntegersMatrix, IntegersVector, i32);
-two_dimensional_math_methods!(IntegersMatrix, IntegersVector, i32);
-matrices_sampling_methods!(IntegersMatrix);
+interop!(IntegersMatrix, IntegersVector, i32);
+basic!(IntegersMatrix, IntegersVector, i32);
+math!(IntegersMatrix, IntegersVector, i32);
+sampling!(IntegersMatrix);
 
 use std::ops::*;
 
