@@ -1,5 +1,6 @@
-import { FloatsVector } from '@ml.wasm/linalg';
+import { FloatsMatrix } from '@ml.wasm/linalg';
 import * as Comlink from 'comlink';
+import { timeit } from '../utils/timeit';
 
 export class ScratchPad {
   async init() {
@@ -12,11 +13,20 @@ export class ScratchPad {
     console.log(`Inits completed (threads: ${threads})`);
   }
   test() {
-    const a = new FloatsVector([1, 2, 3, 4, 5]);
+    // const a = new FloatsMatrix([[1, 2], [3, 4]]);
+    // const b = new FloatsMatrix([[5, 6], [7, 8]]);
 
-    a.powi(2);
+    // const c = a.dot(b);
+    // console.log(c.data);
 
-    console.log(a.data);
+    const a = FloatsMatrix.newWithRandom([10000, 1000]);
+    const b = a.clone();
+
+    // console.log(a.toString());
+    const time = (x: any) => console.log(timeit(x)[0]);
+
+    time(() => a.ln());
+    time(() => b.lnPar());
   }
 }
 

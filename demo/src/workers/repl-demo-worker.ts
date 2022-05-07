@@ -37,9 +37,10 @@ export class ReplDemo {
       matrices.push(matrix.clone());
     }
     const result = new Function(...tags, `return ${functionBody}`)(...matrices);
+    console.log(result.data);
 
     const arrays: Record<string, Array2d> = {};
-    switch (dimension(result)) {
+    switch (dimension(typeof result == 'number' ? result : result.data)) {
       case Dimension.None:
         for (let i = 0; i < tags.length; ++i) {
           arrays[tags[i]] = matrices[i].data;
